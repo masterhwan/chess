@@ -1,16 +1,16 @@
 package chess;
 
-public class BlackRook {
+public class WhiteRook {
 	private String color;
 	private String name;
 	private String display;
 	private double score;
 	private boolean move;
 
-	public BlackRook() {
-		color = "black";
+	public WhiteRook() {
+		color = "white";
 		name = "rook";
-		display = "R";
+		display = "r";
 		score = 2.0;
 		move = false;
 	}
