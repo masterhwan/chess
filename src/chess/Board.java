@@ -1,6 +1,6 @@
 package chess;
 
-public class Draw {
+public class Board {
 
 	String returnLine = System.getProperty("line.separator");
 	String line = "........";
