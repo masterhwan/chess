@@ -16,6 +16,5 @@ public class PawnTest {
 	public void createWhitePawn() {
 		WhitePawn whitePawn = new WhitePawn();
 		assertEquals("white", whitePawn.getColor());
-
 	}
 }
