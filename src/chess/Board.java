@@ -1,13 +1,24 @@
 package chess;
 
-public class Board {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Board {
 	String returnLine = System.getProperty("line.separator");
 	String line = "........";
+	List<File> files = new ArrayList<>(8);
 
-	public Object draw() {
-		return line + returnLine + line + returnLine + line + returnLine + line + returnLine + line + returnLine + line
-				+ returnLine + line + returnLine + line + returnLine;
+	public Board() {
+		createBoard();
 	}
 
+	private void createBoard() {
+		for (int i = 0; i < files.size(); i++) {
+			files.add(new File(i));
+		}
+	}
+
+	public Object draw() {
+		return new Board();
+	}
 }

@@ -1,4 +1,4 @@
-package chess;
+package piece;
 
 public class BlackKing {
 	private String color;
@@ -17,6 +17,10 @@ public class BlackKing {
 
 	public String getColor() {
 		return color;
+	}
+
+	public String getDisplay() {
+		return display;
 	}
 
 }

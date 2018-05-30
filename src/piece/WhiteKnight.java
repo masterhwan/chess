@@ -1,16 +1,16 @@
-package chess;
+package piece;
 
-public class BlackKnight {
+public class WhiteKnight {
 	private String color;
 	private String name;
 	private String display;
 	private double score;
 	private boolean move;
 
-	public BlackKnight() {
-		color = "black";
+	public WhiteKnight() {
+		color = "white";
 		name = "knight";
-		display = "N";
+		display = "n";
 		score = 2.5;
 		move = false;
 	}
@@ -18,5 +18,4 @@ public class BlackKnight {
 	public String getDisplay() {
 		return display;
 	}
-
 }

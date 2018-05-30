@@ -1,17 +1,17 @@
-package chess;
+package piece;
 
-public class WhiteKing {
+public class BlackRook {
 	private String color;
 	private String name;
 	private String display;
 	private double score;
 	private boolean move;
 
-	public WhiteKing() {
-		color = "white";
-		name = "king";
-		display = "k";
-		score = 0;
+	public BlackRook() {
+		color = "black";
+		name = "rook";
+		display = "R";
+		score = 2.0;
 		move = false;
 	}
 
@@ -19,4 +19,7 @@ public class WhiteKing {
 		return score;
 	}
 
+	public String getDisplay() {
+		return display;
+	}
 }

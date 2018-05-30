@@ -1,4 +1,4 @@
-package chess;
+package piece;
 
 public class WhiteQueen {
 	private String color;

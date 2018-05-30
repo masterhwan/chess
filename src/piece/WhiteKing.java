@@ -1,21 +1,22 @@
-package chess;
+package piece;
 
-public class WhiteRook {
+public class WhiteKing {
 	private String color;
 	private String name;
 	private String display;
 	private double score;
 	private boolean move;
 
-	public WhiteRook() {
+	public WhiteKing() {
 		color = "white";
-		name = "rook";
-		display = "r";
-		score = 2.0;
+		name = "king";
+		display = "k";
+		score = 0;
 		move = false;
 	}
 
 	public double getScore() {
 		return score;
 	}
+
 }
