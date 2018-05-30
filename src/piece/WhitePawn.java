@@ -19,4 +19,8 @@ public class WhitePawn {
 		return color;
 	}
 
+	public String getDisplay() {
+		return display;
+	}
+
 }

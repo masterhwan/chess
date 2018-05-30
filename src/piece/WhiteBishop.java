@@ -19,4 +19,8 @@ public class WhiteBishop {
 		return name;
 	}
 
+	public String getDisplay() {
+		return display;
+	}
+
 }

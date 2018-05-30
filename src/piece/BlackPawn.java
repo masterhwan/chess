@@ -19,4 +19,8 @@ public class BlackPawn {
 		return color;
 	}
 
+	public String getDisplay() {
+		return display;
+	}
+
 }

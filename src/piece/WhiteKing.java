@@ -19,4 +19,8 @@ public class WhiteKing {
 		return score;
 	}
 
+	public String getDisplay() {
+		return display;
+	}
+
 }

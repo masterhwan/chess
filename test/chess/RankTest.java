@@ -22,6 +22,6 @@ public class RankTest {
 	@Test
 	public void showRanks() throws Exception {
 		rank.drawSpecialBlackPieces();
-		assertEquals("RNBQKBNR", rank.show());
+		assertEquals("RNBQKBNR\n", rank.show());
 	}
 }

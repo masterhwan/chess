@@ -18,4 +18,8 @@ public class WhiteRook {
 	public double getScore() {
 		return score;
 	}
+
+	public String getDisplay() {
+		return display;
+	}
 }

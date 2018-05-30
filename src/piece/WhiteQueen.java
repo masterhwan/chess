@@ -19,4 +19,8 @@ public class WhiteQueen {
 		return move;
 	}
 
+	public String getDisplay() {
+		return display;
+	}
+
 }
