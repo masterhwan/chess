@@ -19,10 +19,10 @@ public class File {
 			} else if (result == 6) {
 				files.add(new Rank().createBlackPawn());
 
-			} else if (result == 0) {
+			} else if (result == 1) {
 				files.add(new Rank().createWhitePawn());
 
-			} else if (result == 1) {
+			} else if (result == 0) {
 				files.add(new Rank().createSpecialWhitePieces());
 
 			} else {

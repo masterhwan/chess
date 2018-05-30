@@ -20,7 +20,7 @@ public class BoardTest {
 	@Test
 	public void drawTest() {
 		assertEquals(blackSpectialLine + returnLine + blakcPawnLine + returnLine + emptyLine + returnLine + emptyLine
-				+ returnLine + emptyLine + returnLine + emptyLine + returnLine + whiteSpectialLine + returnLine
-				+ whitePawnLine + returnLine, board.draw());
+				+ returnLine + emptyLine + returnLine + emptyLine + returnLine + whitePawnLine + returnLine
+				+ whiteSpectialLine + returnLine, board.draw());
 	}
 }

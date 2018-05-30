@@ -2,8 +2,9 @@ package chess;
 
 public class Main {
 
-	public Object hello() {
-		return "Hello";
+	public static void main(String[] args) {
+		Board board = new Board();
+		System.out.println(board.draw());
 	}
 
 }

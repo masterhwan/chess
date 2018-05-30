@@ -26,7 +26,7 @@ public class FileTest {
 	@Test
 	public void showFile() throws Exception {
 		file = new File(3);
-		assertEquals(emptyLine + returnLine + whiteSpectialLine +
-				returnLine + whitePawnLine + returnLine, file.show());
+		assertEquals(emptyLine + returnLine + whitePawnLine +
+				returnLine + whiteSpectialLine + returnLine, file.show());
 	}
 }
