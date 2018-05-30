@@ -1,4 +1,4 @@
-package chess;
+package piece;
 
 public class WhiteRook {
 	private String color;
@@ -17,5 +17,9 @@ public class WhiteRook {
 
 	public double getScore() {
 		return score;
+	}
+
+	public String getDisplay() {
+		return display;
 	}
 }

@@ -1,22 +1,26 @@
-package chess;
+package piece;
 
-public class WhitePawn {
+public class BlackPawn {
 	private String color;
 	private String name;
 	private String display;
 	private double score;
 	private boolean move;
 
-	public WhitePawn() {
-		color = "white";
+	public BlackPawn() {
+		color = "black";
 		name = "pawn";
-		display = "p";
+		display = "P";
 		score = 1;
 		move = true;
 	}
 
-	public String getColor() {
+	public String getColar() {
 		return color;
+	}
+
+	public String getDisplay() {
+		return display;
 	}
 
 }

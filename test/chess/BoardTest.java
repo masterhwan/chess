@@ -1,19 +1,26 @@
 package chess;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class BoardTest {
 
-	String returnLine = System.getProperty("line.separator");
-	String line = "........";
+	private String returnLine = System.getProperty("line.separator");
+	private String emptyLine = "........";
 
-	Board bard = new Board();
+	private String blackSpectialLine = "RNBQKBNR";
+	private String blakcPawnLine = "PPPPPPPP";
+
+	private String whitePawnLine = "pppppppp";
+	private String whiteSpectialLine = "rnbqkbnr";
+
+	Board board = new Board();
 
 	@Test
 	public void drawTest() {
-		assertEquals(line + returnLine + line + returnLine + line + returnLine + line + returnLine + line + returnLine
-				+ line + returnLine + line + returnLine + line + returnLine, bard.draw());
+		assertEquals(blackSpectialLine + returnLine + blakcPawnLine + returnLine + emptyLine + returnLine + emptyLine
+				+ returnLine + emptyLine + returnLine + emptyLine + returnLine + whitePawnLine + returnLine
+				+ whiteSpectialLine + returnLine, board.draw());
 	}
 }

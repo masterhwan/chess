@@ -1,21 +1,26 @@
-package chess;
+package piece;
 
-public class WhiteKnight {
+public class BlackQueen {
 	private String color;
 	private String name;
 	private String display;
 	private double score;
 	private boolean move;
 
-	public WhiteKnight() {
-		color = "white";
-		name = "knight";
-		display = "n";
-		score = 2.5;
+	public BlackQueen() {
+		color = "black";
+		name = "queen";
+		display = "Q";
+		score = '4';
 		move = false;
+	}
+
+	public boolean isMove() {
+		return move;
 	}
 
 	public String getDisplay() {
 		return display;
 	}
+
 }

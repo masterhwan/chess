@@ -1,4 +1,4 @@
-package chess;
+package piece;
 
 import static org.junit.Assert.*;
 

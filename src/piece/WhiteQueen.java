@@ -1,4 +1,4 @@
-package chess;
+package piece;
 
 public class WhiteQueen {
 	private String color;
@@ -17,6 +17,10 @@ public class WhiteQueen {
 
 	public boolean isMove() {
 		return move;
+	}
+
+	public String getDisplay() {
+		return display;
 	}
 
 }
