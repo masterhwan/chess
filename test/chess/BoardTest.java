@@ -13,14 +13,14 @@ public class BoardTest {
 	private String blakcPawnLine = "PPPPPPPP";
 
 	private String whitePawnLine = "pppppppp";
-	private String whiteSpectialLine = "rnkqkbnr";
+	private String whiteSpectialLine = "rnbqkbnr";
 
 	Board board = new Board();
 
 	@Test
 	public void drawTest() {
 		assertEquals(blackSpectialLine + returnLine + blakcPawnLine + returnLine + emptyLine + returnLine + emptyLine
-				+ returnLine + emptyLine + returnLine + emptyLine + returnLine + whitePawnLine + returnLine
-				+ whiteSpectialLine + returnLine, board.draw());
+				+ returnLine + emptyLine + returnLine + emptyLine + returnLine + whiteSpectialLine + returnLine
+				+ whitePawnLine + returnLine, board.draw());
 	}
 }

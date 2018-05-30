@@ -42,10 +42,17 @@ public class File {
 
 	public String show() {
 		StringBuffer bf = new StringBuffer();
-		for (int i = 0; i < files.size(); i++) {
-			bf.append(files.get(i).show());
-		}
+		createShow(bf);
 		return bf.toString();
 	}
 
+	private void createShow(StringBuffer bf) {
+		for (int i = 0; i < files.size(); i++) {
+			bf.append(files.get(i).show());
+		}
+	}
+
+	public File getFile() {
+		return this;
+	}
 }
