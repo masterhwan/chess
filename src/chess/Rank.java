@@ -25,7 +25,7 @@ public class Rank {
 		return ranks.size();
 	}
 
-	public void drawSpecialBlackPieces() {
+	private void drawSpecialBlackPieces() {
 		ranks.add(new BlackRook().getDisplay());
 		ranks.add(new BlackKnight().getDisplay());
 		ranks.add(new BlackBishop().getDisplay());
@@ -36,7 +36,7 @@ public class Rank {
 		ranks.add(new BlackRook().getDisplay());
 	}
 
-	public void drawBlackPawn() {
+	private void drawBlackPawn() {
 		ranks.add(new BlackPawn().getDisplay());
 		ranks.add(new BlackPawn().getDisplay());
 		ranks.add(new BlackPawn().getDisplay());
@@ -47,7 +47,7 @@ public class Rank {
 		ranks.add(new BlackPawn().getDisplay());
 	}
 
-	public void drawSpecialWhitePieces() {
+	private void drawSpecialWhitePieces() {
 		ranks.add(new WhiteRook().getDisplay());
 		ranks.add(new WhiteKnight().getDisplay());
 		ranks.add(new WhiteBishop().getDisplay());
@@ -58,7 +58,7 @@ public class Rank {
 		ranks.add(new WhiteRook().getDisplay());
 	}
 
-	public void drawWhitePawn() {
+	private void drawWhitePawn() {
 		ranks.add(new WhitePawn().getDisplay());
 		ranks.add(new WhitePawn().getDisplay());
 		ranks.add(new WhitePawn().getDisplay());
@@ -69,7 +69,7 @@ public class Rank {
 		ranks.add(new WhitePawn().getDisplay());
 	}
 
-	public void drawBlank() {
+	private void drawBlank() {
 		ranks.add(".");
 		ranks.add(".");
 		ranks.add(".");
@@ -82,11 +82,45 @@ public class Rank {
 
 	public String show() {
 		StringBuffer bf = new StringBuffer();
+		createShow(bf);
+		return bf.toString();
+	}
+
+	private void createShow(StringBuffer bf) {
 		for (int i = 0; i < ranks.size(); i++) {
 			bf.append(ranks.get(i));
 		}
 		bf.append(returnLine);
-		return bf.toString();
+	}
+
+	public Rank createSpecialBlackPieces() {
+		Rank rank = new Rank();
+		rank.drawSpecialBlackPieces();
+		return rank;
+	}
+
+	public Rank createBlackPawn() {
+		Rank rank = new Rank();
+		rank.drawBlackPawn();
+		return rank;
+	}
+
+	public Rank createWhitePawn() {
+		Rank rank = new Rank();
+		rank.drawWhitePawn();
+		return rank;
+	}
+
+	public Rank createSpecialWhitePieces() {
+		Rank rank = new Rank();
+		rank.drawSpecialWhitePieces();
+		return rank;
+	}
+
+	public Rank createBlank() {
+		Rank rank = new Rank();
+		rank.drawBlank();
+		return rank;
 	}
 
 }
