@@ -20,14 +20,18 @@ public class PawnTest {
 
 	@Test
 	public void create() {
-		String white = "white";
-		String black = "black";
-		verifyPawn(white);
-		verifyPawn(black);
+		verifyPawn(Pawn.WHITE_COLOR);
+		verifyPawn(Pawn.BLACK_COLOR);
 	}
 
 	private void verifyPawn(String color) {
 		Pawn pawn = new Pawn(color);
 		assertEquals(color, pawn.getColor());
+	}
+
+	@Test
+	public void create_기본생성자() throws Exception {
+		Pawn pawn = new Pawn();
+		assertEquals(Pawn.WHITE_COLOR, pawn.getColor());
 	}
 }
