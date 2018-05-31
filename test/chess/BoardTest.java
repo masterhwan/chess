@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import piece.Pawn;
+import piece.Piece;
 
 public class BoardTest {
 	Board board;
@@ -17,12 +17,12 @@ public class BoardTest {
 
 	@Test
 	public void create() throws Exception {
-		Pawn white = new Pawn(Pawn.WHITE_COLOR);
+		Piece white = Piece.createWhitePawn();
 		board.addWhitePawn(white);
 		assertEquals(1, board.whitePawnSize());
 		assertEquals(white, board.findWhitePawn(0));
 
-		Pawn black = new Pawn(Pawn.BLACK_COLOR);
+		Piece black = Piece.createBlackPawn();
 		board.addBlackPawn(black);
 		assertEquals(1, board.blackPawnSize());
 		assertEquals(black, board.findBlackPawn(0));

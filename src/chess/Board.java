@@ -3,14 +3,14 @@ package chess;
 import java.util.ArrayList;
 import java.util.List;
 
-import piece.Pawn;
+import piece.Piece;
 
 public class Board {
 	String returnLine = System.getProperty("line.separator");
 	String line = "........";
 	File board;
-	List<Pawn> blackPawns = new ArrayList<>();
-	List<Pawn> whitePawns = new ArrayList<>();
+	List<Piece> blackPawns = new ArrayList<>();
+	List<Piece> whitePawns = new ArrayList<>();
 
 	public Board() {
 		createBoard();
@@ -32,13 +32,13 @@ public class Board {
 
 	private void addBlackPawns() {
 		for (int i = 0; i < 8; i++) {
-			blackPawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+			blackPawns.add(Piece.createBlackPawn());
 		}
 	}
 
 	private void addWhitePawns() {
 		for (int i = 0; i < 8; i++) {
-			whitePawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
+			whitePawns.add(Piece.createWhitePawn());
 		}
 	}
 
@@ -57,7 +57,7 @@ public class Board {
 	}
 
 	public String getWhitePawnsResult() {
-		Pawn pawn;
+		Piece pawn;
 		StringBuffer bf = new StringBuffer();
 		for (int i = 0; i < 8; i++) {
 			pawn = whitePawns.get(i);
@@ -67,7 +67,7 @@ public class Board {
 	}
 
 	public String getBlackPawnsResult() {
-		Pawn pawn;
+		Piece pawn;
 		StringBuffer bf = new StringBuffer();
 		for (int i = 0; i < 8; i++) {
 			pawn = blackPawns.get(i);
@@ -76,11 +76,11 @@ public class Board {
 		return bf.toString();
 	}
 
-	public Pawn findBlackPawn(int index) {
+	public Piece findBlackPawn(int index) {
 		return blackPawns.get(index);
 	}
 
-	public Pawn findWhitePawn(int index) {
+	public Piece findWhitePawn(int index) {
 		return whitePawns.get(index);
 	}
 
@@ -88,11 +88,11 @@ public class Board {
 		return blackPawns.size();
 	}
 
-	public void addBlackPawn(Pawn pawn) {
+	public void addBlackPawn(Piece pawn) {
 		blackPawns.add(pawn);
 	}
 
-	public void addWhitePawn(Pawn pawn) {
+	public void addWhitePawn(Piece pawn) {
 		whitePawns.add(pawn);
 	}
 
