@@ -9,8 +9,10 @@ public class Board {
 	String returnLine = System.getProperty("line.separator");
 	String line = "........";
 	File board;
+	List<Piece> blackPieces = new ArrayList<>();
 	List<Piece> blackPawns = new ArrayList<>();
 	List<Piece> whitePawns = new ArrayList<>();
+	List<Piece> whitePieces = new ArrayList<>();
 
 	public Board() {
 		createBoard();
@@ -26,8 +28,33 @@ public class Board {
 	}
 
 	public void initialize() {
-		addWhitePawns();
+		addBlackPiece();
 		addBlackPawns();
+		addWhitePawns();
+		addWhitePiece();
+	}
+
+	private void addWhitePiece() {
+		whitePieces.add(Piece.createWhiteRook());
+		whitePieces.add(Piece.createWhiteKnight());
+		whitePieces.add(Piece.createWhiteBishop());
+		whitePieces.add(Piece.createWhiteQueen());
+		whitePieces.add(Piece.createWhiteKing());
+		whitePieces.add(Piece.createWhiteBishop());
+		whitePieces.add(Piece.createWhiteKnight());
+		whitePieces.add(Piece.createWhiteRook());
+
+	}
+
+	private void addBlackPiece() {
+		blackPieces.add(Piece.createBlackRook());
+		blackPieces.add(Piece.createBlackKnight());
+		blackPieces.add(Piece.createBlackBishop());
+		blackPieces.add(Piece.createBlackQueen());
+		blackPieces.add(Piece.createBlackKing());
+		blackPieces.add(Piece.createBlackBishop());
+		blackPieces.add(Piece.createBlackKnight());
+		blackPieces.add(Piece.createBlackRook());
 	}
 
 	private void addBlackPawns() {
@@ -42,17 +69,37 @@ public class Board {
 		}
 	}
 
-	public String print() {
+	private String print() {
 		initialize();
 		StringBuffer bf = new StringBuffer();
-		bf.append(line + returnLine);
+		bf.append(getBlackPiecesResult() + returnLine);
 		bf.append(getBlackPawnsResult() + returnLine);
 		bf.append(line + returnLine);
 		bf.append(line + returnLine);
 		bf.append(line + returnLine);
 		bf.append(line + returnLine);
 		bf.append(getWhitePawnsResult() + returnLine);
-		bf.append(line);
+		bf.append(getWhitePiecesResult() + returnLine);
+		return bf.toString();
+	}
+
+	private String getWhitePiecesResult() {
+		Piece piece;
+		StringBuffer bf = new StringBuffer();
+		for (int i = 0; i < 8; i++) {
+			piece = whitePieces.get(i);
+			bf.append(piece.getRepresentation());
+		}
+		return bf.toString();
+	}
+
+	private String getBlackPiecesResult() {
+		Piece piece;
+		StringBuffer bf = new StringBuffer();
+		for (int i = 0; i < 8; i++) {
+			piece = blackPieces.get(i);
+			bf.append(piece.getRepresentation());
+		}
 		return bf.toString();
 	}
 
@@ -98,5 +145,21 @@ public class Board {
 
 	public int whitePawnSize() {
 		return whitePawns.size();
+	}
+
+	public int blackPieceSize() {
+		return blackPieces.size();
+	}
+
+	public int whitePieceSize() {
+		return whitePieces.size();
+	}
+
+	public int pieceCount() {
+		return blackPieceSize() + blackPawnSize() + whitePawnSize() + whitePieceSize();
+	}
+
+	public String showBoard() {
+		return print();
 	}
 }

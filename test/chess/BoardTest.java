@@ -9,6 +9,7 @@ import piece.Piece;
 
 public class BoardTest {
 	Board board;
+	String returnLine = System.getProperty("line.separator");
 
 	@Before
 	public void setUp() {
@@ -38,8 +39,17 @@ public class BoardTest {
 	}
 
 	@Test
-	public void BoardPrint() throws Exception {
-		assertEquals("........\n" + "PPPPPPPP\n" + "........\n" + "........\n" + "........\n" + "........\n"
-				+ "pppppppp\n" + "........", board.print());
+	public void show() throws Exception {
+		board.initialize();
+		assertEquals(32, board.pieceCount());
+		String blankRank = appendNewLine("........");
+		assertEquals(appendNewLine("RNBQKBNR") + appendNewLine("PPPPPPPP") + blankRank + blankRank + blankRank
+				+ blankRank + appendNewLine("pppppppp") + appendNewLine("rnbqkbnr"), board.showBoard());
+	}
+
+	private String appendNewLine(String string) {
+		StringBuffer bf = new StringBuffer();
+		bf.append(string);
+		return bf.toString() + returnLine;
 	}
 }

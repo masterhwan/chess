@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-		System.out.println(board.print());
+		System.out.println(board.showBoard());
 		String message = "start";
 		Scanner scanner = new Scanner(System.in);
 		while (message.equals("start")) {
