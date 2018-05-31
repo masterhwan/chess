@@ -9,7 +9,8 @@ public class Board {
 	String returnLine = System.getProperty("line.separator");
 	String line = "........";
 	File board;
-	List<Pawn> pawns = new ArrayList<>();
+	List<Pawn> blackPawns = new ArrayList<>();
+	List<Pawn> whitePawns = new ArrayList<>();
 
 	public Board() {
 		createBoard();
@@ -24,18 +25,6 @@ public class Board {
 		return board.show();
 	}
 
-	public void add(Pawn pawn) {
-		pawns.add(pawn);
-	}
-
-	public int size() {
-		return pawns.size();
-	}
-
-	public Pawn findPawn(int i) {
-		return pawns.get(i);
-	}
-
 	public void initialize() {
 		addWhitePawns();
 		addBlackPawns();
@@ -43,13 +32,13 @@ public class Board {
 
 	private void addBlackPawns() {
 		for (int i = 0; i < 8; i++) {
-			pawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+			blackPawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
 		}
 	}
 
 	private void addWhitePawns() {
 		for (int i = 0; i < 8; i++) {
-			pawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
+			whitePawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
 		}
 	}
 
@@ -71,7 +60,7 @@ public class Board {
 		Pawn pawn;
 		StringBuffer bf = new StringBuffer();
 		for (int i = 0; i < 8; i++) {
-			pawn = pawns.get(i);
+			pawn = whitePawns.get(i);
 			bf.append(pawn.getRepresentation());
 		}
 		return bf.toString();
@@ -80,10 +69,34 @@ public class Board {
 	public String getBlackPawnsResult() {
 		Pawn pawn;
 		StringBuffer bf = new StringBuffer();
-		for (int i = 15; i >= 8; i--) {
-			pawn = pawns.get(i);
+		for (int i = 0; i < 8; i++) {
+			pawn = blackPawns.get(i);
 			bf.append(pawn.getRepresentation());
 		}
 		return bf.toString();
+	}
+
+	public Pawn findBlackPawn(int index) {
+		return blackPawns.get(index);
+	}
+
+	public Pawn findWhitePawn(int index) {
+		return whitePawns.get(index);
+	}
+
+	public int blackPawnSize() {
+		return blackPawns.size();
+	}
+
+	public void addBlackPawn(Pawn pawn) {
+		blackPawns.add(pawn);
+	}
+
+	public void addWhitePawn(Pawn pawn) {
+		whitePawns.add(pawn);
+	}
+
+	public int whitePawnSize() {
+		return whitePawns.size();
 	}
 }
