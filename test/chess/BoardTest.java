@@ -57,11 +57,13 @@ public class BoardTest {
 	public void boardInitialize() throws Exception {
 		board.initialize();
 		assertEquals(16, board.size());
+		assertEquals("pppppppp", board.getWhitePawnsResult());
+		assertEquals("PPPPPPPP", board.getBlackPawnsResult());
 	}
 
 	@Test
 	public void BoardPrint() throws Exception {
 		assertEquals("........\n" + "PPPPPPPP\n" + "........\n" + "........\n" + "........\n" + "........\n"
-				+ "pppppppp\n" + "........\n", board.print());
+				+ "pppppppp\n" + "........", board.print());
 	}
 }
