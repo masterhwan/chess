@@ -89,4 +89,12 @@ public class Piece {
 		return new Piece(BLACK_COLOR, BLACK_KING_REPRESENTATION);
 	}
 
+	public boolean isBlack() {
+		return color == BLACK_COLOR;
+	}
+
+	public boolean isWhite() {
+		return color == WHITE_COLOR;
+	}
+
 }

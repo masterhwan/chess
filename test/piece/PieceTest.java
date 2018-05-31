@@ -25,4 +25,14 @@ public class PieceTest {
 		assertEquals(color, piece.getColor());
 		assertEquals(representation, piece.getRepresentation());
 	}
+
+	@Test
+	public void check_piece_color() throws Exception {
+		Piece blackRook = Piece.createBlackRook();
+		Piece whiteRook = Piece.createWhiteRook();
+		assertTrue(blackRook.isBlack());
+		assertFalse(blackRook.isWhite());
+		assertFalse(whiteRook.isBlack());
+		assertTrue(whiteRook.isWhite());
+	}
 }
