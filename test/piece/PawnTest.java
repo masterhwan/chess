@@ -20,7 +20,14 @@ public class PawnTest {
 
 	@Test
 	public void create() {
-		Pawn pawn = new Pawn("white");
-		assertEquals("white", pawn.getColor());
+		String white = "white";
+		String black = "black";
+		verifyPawn(white);
+		verifyPawn(black);
+	}
+
+	private void verifyPawn(String color) {
+		Pawn pawn = new Pawn(color);
+		assertEquals(color, pawn.getColor());
 	}
 }
