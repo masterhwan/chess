@@ -7,7 +7,7 @@ import piece.Pawn;
 
 public class Board {
 	String returnLine = System.getProperty("line.separator");
-	String line = "........";
+	String line = "........" + returnLine;
 	File board;
 	List<Pawn> pawns = new ArrayList<>();
 
@@ -34,5 +34,52 @@ public class Board {
 
 	public Pawn findPawn(int i) {
 		return pawns.get(i);
+	}
+
+	public void initialize() {
+		addWhitePawns();
+		addBlackPawns();
+	}
+
+	private void addBlackPawns() {
+		for (int i = 0; i < 8; i++) {
+			pawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+		}
+	}
+
+	private void addWhitePawns() {
+		for (int i = 0; i < 8; i++) {
+			pawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
+		}
+	}
+
+	public String print() {
+		initialize();
+		StringBuffer bf = new StringBuffer();
+		bf.append(line);
+		bf.append(addBlackPawnRepresentation());
+		bf.append(line);
+		bf.append(line);
+		bf.append(line);
+		bf.append(line);
+		bf.append(addWhitePawnRepresentation());
+		bf.append(line);
+		return bf.toString();
+	}
+
+	private String addWhitePawnRepresentation() {
+		StringBuffer bf = new StringBuffer();
+		for (int i = 0; i < 8; i++) {
+			bf.append(pawns.get(i).getRepresentation());
+		}
+		return bf.toString() + returnLine;
+	}
+
+	private String addBlackPawnRepresentation() {
+		StringBuffer bf = new StringBuffer();
+		for (int i = 15; i >= 8; i--) {
+			bf.append(pawns.get(i).getRepresentation());
+		}
+		return bf.toString() + returnLine;
 	}
 }
