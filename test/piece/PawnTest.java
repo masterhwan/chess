@@ -17,4 +17,10 @@ public class PawnTest {
 		WhitePawn whitePawn = new WhitePawn();
 		assertEquals("white", whitePawn.getColor());
 	}
+
+	@Test
+	public void create() {
+		Pawn pawn = new Pawn("white");
+		assertEquals("white", pawn.getColor());
+	}
 }
