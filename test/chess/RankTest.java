@@ -30,6 +30,5 @@ public class RankTest {
 	public void get_blackPawn() throws Exception {
 		rank.createBlackPawnRank();
 		assertEquals("PPPPPPPP", rank.getRankRepresentation());
-
 	}
 }
