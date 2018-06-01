@@ -3,6 +3,9 @@ package chess;
 import java.util.ArrayList;
 import java.util.List;
 
+import piece.Piece.Color;
+import piece.Piece.Type;
+
 public class Board {
 	String returnLine = System.getProperty("line.separator");
 	String line = "........";
@@ -68,5 +71,29 @@ public class Board {
 
 	public int pieceCount() {
 		return ranks.size() * 8;
+	}
+
+	public int getBlackPawnCount() {
+		return getCount(Color.BLACK, Type.PAWN);
+	}
+
+	public int getBlackPieceCount(Type type) {
+		return getCount(Color.BLACK, type);
+	}
+
+	public int getWhitePawnCount() {
+		return getCount(Color.WHITE, Type.PAWN);
+	}
+
+	public int getWhitePieceCount(Type type) {
+		return getCount(Color.WHITE, type);
+	}
+
+	private int getCount(Color color, Type type) {
+		int count = 0;
+		for (Rank index : ranks) {
+			count += index.getPieceCount(color, type);
+		}
+		return count;
 	}
 }

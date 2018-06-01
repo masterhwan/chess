@@ -1,10 +1,11 @@
 package chess;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import piece.Piece;
+import piece.Piece.Color;
+import piece.Piece.Type;
 
 public class Rank {
 
@@ -93,4 +94,20 @@ public class Rank {
 		}
 		return bf.toString();
 	}
+
+	public int getPieceCount(Color color, Type type) {
+		int count = 0;
+		for (Piece index : pieces) {
+			count += isPiece(index, color, type);
+		}
+		return count;
+	}
+
+	private int isPiece(Piece index, Color color, Type type) {
+		if (index.getColor().equals(color) && index.getType().equals(type)) {
+			return 1;
+		}
+		return 0;
+	}
+
 }
