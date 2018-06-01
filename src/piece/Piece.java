@@ -25,6 +25,7 @@ public class Piece {
 
 	private Color color;
 	private char representaion;
+	private Type type;
 
 	private Piece(Color color) {
 		this.color = color;
@@ -37,6 +38,7 @@ public class Piece {
 
 	private Piece(Color color, Type type) {
 		this.color = color;
+		this.type = type;
 		if (color.equals(Color.WHITE)) {
 			this.representaion = type.getWhiteRepresentation();
 			return;
@@ -101,11 +103,19 @@ public class Piece {
 	}
 
 	public boolean isBlack() {
-		return color == Color.BLACK;
+		return color.equals(Color.BLACK);
 	}
 
 	public boolean isWhite() {
-		return color == Color.WHITE;
+		return color.equals(Color.WHITE);
+	}
+
+	public static Piece createBlank() {
+		return new Piece(Color.NOCOLOR, Type.NO_PIECE);
+	}
+
+	public Type getType() {
+		return type;
 	}
 
 }
