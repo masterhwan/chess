@@ -2,18 +2,34 @@ package chess;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class RankTest {
-	@Test
-	public void getRankCount() throws Exception {
-		Rank rank = new Rank().createSpecialBlackPieces();
-		assertEquals((int) 8, rank.getRankCount());
+	Rank rank;
+
+	@Before
+	public void setUp() {
+		rank = new Rank();
 	}
 
 	@Test
-	public void showRanks() throws Exception {
-		Rank rank = new Rank().createSpecialBlackPieces();
-		assertEquals("RNBQKBNR\n", rank.show());
+	public void add_piece() throws Exception {
+		rank.createBlackPiecesRank();
+		rank.createBlackPawnRank();
+		rank.createBlankRank();
+		rank.createBlankRank();
+		rank.createBlankRank();
+		rank.createBlankRank();
+		rank.createWhitePawnRank();
+		rank.createWhitePiecesRank();
+		assertEquals(64, rank.size());
+	}
+
+	@Test
+	public void get_blackPawn() throws Exception {
+		rank.createBlackPawnRank();
+		assertEquals("PPPPPPPP", rank.getRankRepresentation());
+
 	}
 }

@@ -8,24 +8,11 @@ import piece.Piece;
 public class Board {
 	String returnLine = System.getProperty("line.separator");
 	String line = "........";
-	File board;
 	List<Piece> blackPieces = new ArrayList<>();
 	List<Piece> blackPawns = new ArrayList<>();
 	List<Piece> whitePawns = new ArrayList<>();
 	List<Piece> whitePieces = new ArrayList<>();
-
-	public Board() {
-		createBoard();
-	}
-
-	private void createBoard() {
-		File file = new File(8);
-		board = file.getFile();
-	}
-
-	public String draw() {
-		return board.show();
-	}
+	List<Rank> ranks = new ArrayList<>();
 
 	public void initialize() {
 		addBlackPiece();
