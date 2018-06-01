@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import piece.Piece;
 import piece.Piece.Type;
 
 public class BoardTest {
@@ -28,6 +29,15 @@ public class BoardTest {
 	public void return_piece() throws Exception {
 		assertEquals(8, board.getBlackPawnCount());
 		assertEquals(2, board.getBlackPieceCount(Type.ROOK));
+	}
+
+	@Test
+	public void find_piece() throws Exception {
+		assertEquals(Piece.createBlackRook(), board.findPiece("a8"));
+		assertEquals(Piece.createBlackRook(), board.findPiece("h8"));
+		assertEquals(Piece.createWhiteRook(), board.findPiece("a1"));
+		assertEquals(Piece.createWhiteRook(), board.findPiece("h1"));
+		assertEquals(Piece.createBlank(), board.findPiece("c4"));
 	}
 
 	private String appendNewLine(String string) {

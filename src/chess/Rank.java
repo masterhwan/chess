@@ -110,4 +110,8 @@ public class Rank {
 		return 0;
 	}
 
+	public Piece getFindPiece(int xPos) {
+		return pieces.get(xPos);
+	}
+
 }
