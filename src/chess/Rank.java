@@ -1,6 +1,8 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import piece.Piece;
@@ -120,5 +122,43 @@ public class Rank {
 
 	public Piece findPiece(int xpos) {
 		return pieces.get(xpos);
+	}
+
+	public double findPiece(Color color) {
+		double point = 0;
+		for (Piece index : pieces) {
+			point += index.getPoint(color);
+		}
+		return point;
+	}
+
+	public boolean isHavePawn(Color color, Type type) {
+		return false;
+	}
+
+	public void sortLowToHigh() {
+		Collections.sort(pieces, new Comparator<Piece>() {
+			@Override
+			public int compare(Piece p1, Piece p2) {
+				if (p1.getPoint() < p2.getPoint()) {
+					return -1;
+				}
+				return 0;
+			}
+
+		});
+	}
+
+	public void sortHighToLow() {
+		Collections.sort(pieces, new Comparator<Piece>() {
+			@Override
+			public int compare(Piece p1, Piece p2) {
+				if (p1.getPoint() > p2.getPoint()) {
+					return -1;
+				}
+				return 0;
+			}
+
+		});
 	}
 }

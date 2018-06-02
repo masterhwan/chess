@@ -1,6 +1,6 @@
 package chess;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -87,7 +87,7 @@ public class BoardTest {
 		System.out.println(board.showBoard());
 
 		assertEquals(20, board.caculcatePoint(Color.BLACK), 0.01);
-		assertEquals(20, board.caculcatePoint(Color.WHITE), 0.01);
+		assertEquals(20.5, board.caculcatePoint(Color.WHITE), 0.01);
 
 	}
 
@@ -100,4 +100,5 @@ public class BoardTest {
 		bf.append(string);
 		return bf.toString() + returnLine;
 	}
+
 }

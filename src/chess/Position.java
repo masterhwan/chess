@@ -24,4 +24,11 @@ public class Position {
 		return yPos;
 	}
 
+	public void setPosition(String position) {
+		char x = position.charAt(0);
+		xPos = x - 'a';
+		char y = position.charAt(1);
+		yPos = Character.getNumericValue(y) - 1;
+	}
+
 }

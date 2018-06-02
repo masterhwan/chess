@@ -1,17 +1,19 @@
 package piece;
 
-public class Piece {
+public class Piece implements Comparable<Piece> {
 	public enum Color {
 		BLACK, WHITE, NOCOLOR;
 	}
 
 	public enum Type {
-		PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
+		PAWN('p', 1), ROOK('r', 5), KNIGHT('n', 2.5), BISHOP('b', 3), QUEEN('q', 9), KING('k', 0), NO_PIECE('.', 0);
 
 		private char representation;
+		private double point;
 
-		Type(char representation) {
+		Type(char representation, double point) {
 			this.representation = representation;
+			this.point = point;
 		}
 
 		public char getWhiteRepresentation() {
@@ -21,11 +23,16 @@ public class Piece {
 		public char getBlackRepresentation() {
 			return Character.toUpperCase(representation);
 		}
+
+		public double getPoint() {
+			return point;
+		}
 	}
 
 	private Color color;
 	private char representaion;
 	private Type type;
+	private double point;
 
 	private Piece(Color color) {
 		this.color = color;
@@ -39,6 +46,7 @@ public class Piece {
 	private Piece(Color color, Type type) {
 		this.color = color;
 		this.type = type;
+		this.point = type.getPoint();
 		if (color.equals(Color.WHITE)) {
 			this.representaion = type.getWhiteRepresentation();
 			return;
@@ -157,5 +165,21 @@ public class Piece {
 	@Override
 	public String toString() {
 		return "Piece [type=" + type + "]";
+	}
+
+	public double getPoint() {
+		return point;
+	}
+
+	public double getPoint(Color color) {
+		if (color.equals(this.color)) {
+			return point;
+		}
+		return 0;
+	}
+
+	@Override
+	public int compareTo(Piece piece) {
+		return 0;
 	}
 }

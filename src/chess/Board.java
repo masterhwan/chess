@@ -1,6 +1,9 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import piece.Piece;
@@ -57,6 +60,10 @@ public class Board {
 		ranks.add(rank);
 	}
 
+	public String showBoard() {
+		return print();
+	}
+
 	private String print() {
 		StringBuffer bf = new StringBuffer();
 		for (int i = 7; i >= 0; i--) {
@@ -65,63 +72,63 @@ public class Board {
 		return bf.toString();
 	}
 
-	public String showBoard() {
-		return print();
-	}
-
 	public int pieceCount() {
-		return ranks.size() * 8;
+		int size = 0;
+		for (Rank index : ranks) {
+			size += index.size();
+		}
+		return size;
 	}
 
 	public int getBlackPawnCount() {
-		return getCount(Color.BLACK, Type.PAWN);
+		return getPieceCount(Color.BLACK, Type.PAWN);
 	}
 
 	public int getBlackRookPieceCount() {
-		return getCount(Color.BLACK, Type.ROOK);
+		return getPieceCount(Color.BLACK, Type.ROOK);
 	}
 
 	public int getBlackKnightPieceCount() {
-		return getCount(Color.BLACK, Type.KNIGHT);
+		return getPieceCount(Color.BLACK, Type.KNIGHT);
 	}
 
 	public int getBlackBishopCount() {
-		return getCount(Color.BLACK, Type.BISHOP);
+		return getPieceCount(Color.BLACK, Type.BISHOP);
 	}
 
 	public int getBlackQueenCount() {
-		return getCount(Color.BLACK, Type.QUEEN);
+		return getPieceCount(Color.BLACK, Type.QUEEN);
 	}
 
 	public int getBlackKingCount() {
-		return getCount(Color.BLACK, Type.KING);
+		return getPieceCount(Color.BLACK, Type.KING);
 	}
 
 	public int getWhitePawnCount() {
-		return getCount(Color.WHITE, Type.PAWN);
+		return getPieceCount(Color.WHITE, Type.PAWN);
 	}
 
 	public int getWhiteRookPieceCount() {
-		return getCount(Color.WHITE, Type.ROOK);
+		return getPieceCount(Color.WHITE, Type.ROOK);
 	}
 
 	public int getWhiteKnightPieceCount() {
-		return getCount(Color.WHITE, Type.KNIGHT);
+		return getPieceCount(Color.WHITE, Type.KNIGHT);
 	}
 
 	public int getWhiteBishopPieceCount() {
-		return getCount(Color.WHITE, Type.BISHOP);
+		return getPieceCount(Color.WHITE, Type.BISHOP);
 	}
 
 	public int getWhiteQueenCount() {
-		return getCount(Color.WHITE, Type.QUEEN);
+		return getPieceCount(Color.WHITE, Type.QUEEN);
 	}
 
 	public int getWhiteKingCount() {
-		return getCount(Color.WHITE, Type.KING);
+		return getPieceCount(Color.WHITE, Type.KING);
 	}
 
-	private int getCount(Color color, Type type) {
+	private int getPieceCount(Color color, Type type) {
 		int count = 0;
 		for (Rank index : ranks) {
 			count += index.getPieceCount(color, type);
@@ -131,10 +138,10 @@ public class Board {
 
 	public Piece findPiece(String inputPosition) {
 		Position position = new Position(inputPosition);
-		return find(ranks.get(position.getYpos()), position.getXpos());
+		return findRank(ranks.get(position.getYpos()), position.getXpos());
 	}
 
-	private Piece find(Rank rank, int xpos) {
+	private Piece findRank(Rank rank, int xpos) {
 		return rank.findPiece(xpos);
 	}
 
@@ -155,13 +162,19 @@ public class Board {
 	}
 
 	private double calculateWhitePoint() {
-		return getWhitePawnCount() * 1 + getWhiteRookPieceCount() * 5 + getWhiteKnightPieceCount() * 2.5
-				+ getWhiteBishopPieceCount() * 3 + getWhiteQueenCount() * 9;
+		double point = 0;
+		for (Rank index : ranks) {
+			point += index.findPiece(Color.WHITE);
+		}
+		return point;
 	}
 
 	private double calculateBlackPoint() {
-		return getBlackPawnCount() * 1 + getBlackRookPieceCount() * 5 + getBlackKnightPieceCount() * 2.5
-				+ getBlackBishopCount() * 3 + getBlackQueenCount() * 9;
+		double point = 0;
+		for (Rank index : ranks) {
+			point += index.findPiece(Color.BLACK);
+		}
+		return point;
 	}
 
 }

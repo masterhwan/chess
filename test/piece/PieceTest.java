@@ -68,4 +68,10 @@ public class PieceTest {
 		assertTrue(blackPiece.isBlack());
 		assertEquals(type, blackPiece.getType());
 	}
+
+	@Test
+	public void get_point() throws Exception {
+		Piece pawn = Piece.createWhitePawn();
+		assertEquals(pawn.getPoint(), Type.PAWN.getPoint(), 0.01);
+	}
 }
