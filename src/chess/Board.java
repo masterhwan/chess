@@ -8,41 +8,28 @@ import piece.Piece.Color;
 import piece.Piece.Type;
 
 public class Board {
-	String returnLine = System.getProperty("line.separator");
-	String line = "........";
-	List<Rank> ranks = new ArrayList<>();
+	private String returnLine = System.getProperty("line.separator");
+	private List<Rank> ranks = new ArrayList<>();
 
-	public Board() {
-		// initialize();
-		emptyInitialize();
-	}
-
-	private void emptyInitialize() {
+	public void emptyInitialize() {
 		addBlankRank();
 		addBlankRank();
 	}
 
 	public void initialize() {
-		addBlackPieceRank();
-		addBlackPawnsRank();
-		addBlankRank();
-		addWhitePawnsRank();
 		addWhitePieceRank();
+		addWhitePawnsRank();
+		addBlankRank();
+		addBlackPawnsRank();
+		addBlackPieceRank();
 	}
 
 	private void addBlankRank() {
-		Rank rank = new Rank();
-		rank.createBlankRank();
-		ranks.add(rank);
-		rank = new Rank();
-		rank.createBlankRank();
-		ranks.add(rank);
-		rank = new Rank();
-		rank.createBlankRank();
-		ranks.add(rank);
-		rank = new Rank();
-		rank.createBlankRank();
-		ranks.add(rank);
+		for (int i = 0; i < 4; i++) {
+			Rank rank = new Rank();
+			rank.createBlankRank();
+			ranks.add(rank);
+		}
 	}
 
 	private void addWhitePieceRank() {
@@ -72,8 +59,8 @@ public class Board {
 
 	private String print() {
 		StringBuffer bf = new StringBuffer();
-		for (Rank index : ranks) {
-			bf.append(index.getRankRepresentation() + returnLine);
+		for (int i = 7; i >= 0; i--) {
+			bf.append(ranks.get(i).getRankRepresentation() + returnLine);
 		}
 		return bf.toString();
 	}
@@ -90,16 +77,48 @@ public class Board {
 		return getCount(Color.BLACK, Type.PAWN);
 	}
 
-	public int getBlackPieceCount(Type type) {
-		return getCount(Color.BLACK, type);
+	public int getBlackRookPieceCount() {
+		return getCount(Color.BLACK, Type.ROOK);
+	}
+
+	public int getBlackKnightPieceCount() {
+		return getCount(Color.BLACK, Type.KNIGHT);
+	}
+
+	public int getBlackRookCBishopount() {
+		return getCount(Color.BLACK, Type.BISHOP);
+	}
+
+	public int getBlackRookQueenCount() {
+		return getCount(Color.BLACK, Type.QUEEN);
+	}
+
+	public int getBlackRookKingCount() {
+		return getCount(Color.BLACK, Type.KING);
 	}
 
 	public int getWhitePawnCount() {
 		return getCount(Color.WHITE, Type.PAWN);
 	}
 
-	public int getWhitePieceCount(Type type) {
-		return getCount(Color.WHITE, type);
+	public int getwhiteRookPieceCount() {
+		return getCount(Color.WHITE, Type.ROOK);
+	}
+
+	public int getwhiteKnightPieceCount() {
+		return getCount(Color.WHITE, Type.KNIGHT);
+	}
+
+	public int getwhiteRookCBishopount() {
+		return getCount(Color.WHITE, Type.BISHOP);
+	}
+
+	public int getwhiteRookQueenCount() {
+		return getCount(Color.WHITE, Type.QUEEN);
+	}
+
+	public int getwhiteRookKingCount() {
+		return getCount(Color.WHITE, Type.KING);
 	}
 
 	private int getCount(Color color, Type type) {
@@ -111,18 +130,14 @@ public class Board {
 	}
 
 	public Piece findPiece(String position) {
-		char x = position.charAt(0);
-		int xPos = x - 'a';
-		char y = position.charAt(1);
-		int yPos = 8 - Character.getNumericValue(y);
-		return ranks.get(yPos).getFindPiece(xPos);
+		Position move = new Position(position);
+		return ranks.get(move.getYpos()).getFindPiece(move.getXpos());
 	}
 
 	public void move(String position, Piece piece) {
-		char x = position.charAt(0);
-		int xPos = x - 'a';
-		char y = position.charAt(1);
-		int yPos = 8 - Character.getNumericValue(y);
-		ranks.get(yPos).setPiece(xPos, piece);
+		Position move = new Position(position);
+
+		ranks.get(move.getYpos()).setPiece(move.getXpos(), piece);
 	}
+
 }
