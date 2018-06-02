@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import piece.Piece;
+import piece.Piece.Color;
 
 public class BoardTest {
 	Board board;
@@ -60,6 +61,38 @@ public class BoardTest {
 		piece = Piece.createWhiteKing();
 		board.move(position, piece);
 		assertEquals(piece, board.findPiece(position));
+	}
+
+	@Test
+	public void caculcatePoint() throws Exception {
+		board.emptyInitialize();
+
+		addPiece("b6", Piece.createBlackPawn());
+		addPiece("a7", Piece.createBlackPawn());
+		addPiece("c7", Piece.createBlackPawn());
+		addPiece("d7", Piece.createBlackBishop());
+		addPiece("e6", Piece.createBlackQueen());
+		addPiece("b8", Piece.createBlackKing());
+		addPiece("c8", Piece.createBlackRook());
+
+		addPiece("f4", Piece.createWhiteKnight());
+		addPiece("g4", Piece.createWhiteQueen());
+		addPiece("f2", Piece.createWhitePawn());
+		addPiece("f3", Piece.createWhitePawn());
+		addPiece("h3", Piece.createWhitePawn());
+		addPiece("g2", Piece.createWhitePawn());
+		addPiece("e1", Piece.createWhiteRook());
+		addPiece("f1", Piece.createWhiteKing());
+
+		System.out.println(board.showBoard());
+
+		assertEquals(20, board.caculcatePoint(Color.BLACK), 0.01);
+		assertEquals(20, board.caculcatePoint(Color.WHITE), 0.01);
+
+	}
+
+	private void addPiece(String position, Piece piece) {
+		board.move(position, piece);
 	}
 
 	private String appendNewLine(String string) {

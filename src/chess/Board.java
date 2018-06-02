@@ -85,15 +85,15 @@ public class Board {
 		return getCount(Color.BLACK, Type.KNIGHT);
 	}
 
-	public int getBlackRookCBishopount() {
+	public int getBlackBishopCount() {
 		return getCount(Color.BLACK, Type.BISHOP);
 	}
 
-	public int getBlackRookQueenCount() {
+	public int getBlackQueenCount() {
 		return getCount(Color.BLACK, Type.QUEEN);
 	}
 
-	public int getBlackRookKingCount() {
+	public int getBlackKingCount() {
 		return getCount(Color.BLACK, Type.KING);
 	}
 
@@ -101,23 +101,23 @@ public class Board {
 		return getCount(Color.WHITE, Type.PAWN);
 	}
 
-	public int getwhiteRookPieceCount() {
+	public int getWhiteRookPieceCount() {
 		return getCount(Color.WHITE, Type.ROOK);
 	}
 
-	public int getwhiteKnightPieceCount() {
+	public int getWhiteKnightPieceCount() {
 		return getCount(Color.WHITE, Type.KNIGHT);
 	}
 
-	public int getwhiteRookCBishopount() {
+	public int getWhiteBishopPieceCount() {
 		return getCount(Color.WHITE, Type.BISHOP);
 	}
 
-	public int getwhiteRookQueenCount() {
+	public int getWhiteQueenCount() {
 		return getCount(Color.WHITE, Type.QUEEN);
 	}
 
-	public int getwhiteRookKingCount() {
+	public int getWhiteKingCount() {
 		return getCount(Color.WHITE, Type.KING);
 	}
 
@@ -129,15 +129,39 @@ public class Board {
 		return count;
 	}
 
-	public Piece findPiece(String position) {
-		Position move = new Position(position);
-		return ranks.get(move.getYpos()).getFindPiece(move.getXpos());
+	public Piece findPiece(String inputPosition) {
+		Position position = new Position(inputPosition);
+		return find(ranks.get(position.getYpos()), position.getXpos());
 	}
 
-	public void move(String position, Piece piece) {
-		Position move = new Position(position);
+	private Piece find(Rank rank, int xpos) {
+		return rank.findPiece(xpos);
+	}
 
-		ranks.get(move.getYpos()).setPiece(move.getXpos(), piece);
+	public void move(String inputPosition, Piece piece) {
+		Position position = new Position(inputPosition);
+		setPiece(ranks.get(position.getYpos()), position.getXpos(), piece);
+	}
+
+	private void setPiece(Rank rank, int xpos, Piece piece) {
+		rank.setPiece(xpos, piece);
+	}
+
+	public double caculcatePoint(Color color) {
+		if (color.equals(Color.BLACK)) {
+			return calculateBlackPoint();
+		}
+		return calculateWhitePoint();
+	}
+
+	private double calculateWhitePoint() {
+		return getWhitePawnCount() * 1 + getWhiteRookPieceCount() * 5 + getWhiteKnightPieceCount() * 2.5
+				+ getWhiteBishopPieceCount() * 3 + getWhiteQueenCount() * 9;
+	}
+
+	private double calculateBlackPoint() {
+		return getBlackPawnCount() * 1 + getBlackRookPieceCount() * 5 + getBlackKnightPieceCount() * 2.5
+				+ getBlackBishopCount() * 3 + getBlackQueenCount() * 9;
 	}
 
 }
