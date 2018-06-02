@@ -40,6 +40,26 @@ public class BoardTest {
 		assertEquals(Piece.createBlank(), board.findPiece("c4"));
 	}
 
+	@Test
+	public void move() throws Exception {
+		String position = "b5";
+		Piece piece = Piece.createBlackRook();
+		board.move(position, piece);
+
+		assertEquals(piece, board.findPiece(position));
+		position = "b6";
+		piece = Piece.createBlackKing();
+		board.move(position, piece);
+
+		assertEquals(piece, board.findPiece(position));
+		position = "e3";
+		piece = Piece.createWhiteKing();
+		board.move(position, piece);
+
+		assertEquals(piece, board.findPiece(position));
+		System.out.println(board.showBoard());
+	}
+
 	private String appendNewLine(String string) {
 		StringBuffer bf = new StringBuffer();
 		bf.append(string);

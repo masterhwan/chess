@@ -114,4 +114,8 @@ public class Rank {
 		return pieces.get(xPos);
 	}
 
+	public void setPiece(int xPos, Piece piece) {
+		pieces.set(xPos, piece);
+	}
+
 }

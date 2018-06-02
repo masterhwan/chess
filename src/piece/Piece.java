@@ -154,4 +154,8 @@ public class Piece {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Piece [type=" + type + "]";
+	}
 }

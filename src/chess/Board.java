@@ -13,7 +13,13 @@ public class Board {
 	List<Rank> ranks = new ArrayList<>();
 
 	public Board() {
-		initialize();
+		// initialize();
+		emptyInitialize();
+	}
+
+	private void emptyInitialize() {
+		addBlankRank();
+		addBlankRank();
 	}
 
 	public void initialize() {
@@ -28,8 +34,14 @@ public class Board {
 		Rank rank = new Rank();
 		rank.createBlankRank();
 		ranks.add(rank);
+		rank = new Rank();
+		rank.createBlankRank();
 		ranks.add(rank);
+		rank = new Rank();
+		rank.createBlankRank();
 		ranks.add(rank);
+		rank = new Rank();
+		rank.createBlankRank();
 		ranks.add(rank);
 	}
 
@@ -104,5 +116,13 @@ public class Board {
 		char y = position.charAt(1);
 		int yPos = 8 - Character.getNumericValue(y);
 		return ranks.get(yPos).getFindPiece(xPos);
+	}
+
+	public void move(String position, Piece piece) {
+		char x = position.charAt(0);
+		int xPos = x - 'a';
+		char y = position.charAt(1);
+		int yPos = 8 - Character.getNumericValue(y);
+		ranks.get(yPos).setPiece(xPos, piece);
 	}
 }
