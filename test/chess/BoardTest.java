@@ -48,13 +48,20 @@ public class BoardTest {
 
 	@Test
 	public void move() throws Exception {
-		board.emptyInitialize();
+		board.initialize();
+		String sourcePosition = "b2";
+		String targetPosition = "b3";
 
-		String position = "b5";
-		Piece piece = Piece.createBlackRook(new Position(position));
-		board.move(position, piece);
+		board.move(sourcePosition, targetPosition);
 
-		assertEquals(piece, board.findPiece(position));
+		assertEquals(Piece.createBlank(new Position(sourcePosition)), board.findPiece(sourcePosition));
+		assertEquals(Piece.createWhitePawn(new Position(targetPosition)), board.findPiece(targetPosition));
+
+		sourcePosition = "d1";
+		targetPosition = "h7";
+
+		board.move(sourcePosition, targetPosition);
+
 		System.out.println(board.showBoard());
 	}
 

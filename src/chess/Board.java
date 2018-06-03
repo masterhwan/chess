@@ -86,4 +86,23 @@ public class Board {
 		ranks.get(position.getYIndex()).setPiece(position.getXIndex(), piece);
 	}
 
+	public void move(String sourceposition, String targetposition) {
+		Position sourcePosition = new Position(sourceposition);
+		Position targetPosition = new Position(targetposition);
+
+		Piece piece = findPiece(sourcePosition);
+		piece.setPosition(targetPosition);
+		setPiece(ranks.get(targetPosition.getYIndex()), targetPosition.getXIndex(), piece);
+		setBlank(ranks.get(sourcePosition.getYIndex()), sourcePosition.getXIndex(),
+				Piece.createBlank(new Position(sourcePosition.getX(), sourcePosition.getY())));
+	}
+
+	private void setBlank(Rank rank, int xpos, Piece piece) {
+		rank.setPiece(xpos, piece);
+	}
+
+	private Piece findPiece(Position sourcePosition) {
+		return findRank(ranks.get(sourcePosition.getYIndex()), sourcePosition.getXIndex());
+	}
+
 }

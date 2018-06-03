@@ -185,7 +185,11 @@ public class Piece {
 	// return Type.PAWN.getPoint();
 	// }
 
-	private boolean macthType(Type type) {
-		return this.type == type;
+	// private boolean macthType(Type type) {
+	// return this.type == type;
+	// }
+
+	public void setPosition(Position targetPosition) {
+		this.position = targetPosition;
 	}
 }
