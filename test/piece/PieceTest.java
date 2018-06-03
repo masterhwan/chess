@@ -1,64 +1,29 @@
 package piece;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import piece.Piece.Color;
+import chess.Position;
 import piece.Piece.Type;
 
 public class PieceTest {
 	@Test
 	public void create_piece() {
-		verifyPiece(Piece.createWhitePawn(), Piece.Color.WHITE, Piece.Type.PAWN);
-		verifyPiece(Piece.createBlackPawn(), Piece.Color.BLACK, Piece.Type.PAWN);
-		verifyPiece(Piece.createWhiteRook(), Piece.Color.WHITE, Piece.Type.ROOK);
-		verifyPiece(Piece.createBlackRook(), Piece.Color.BLACK, Piece.Type.ROOK);
-		verifyPiece(Piece.createWhiteKnight(), Piece.Color.WHITE, Piece.Type.KNIGHT);
-		verifyPiece(Piece.createWhiteBishop(), Piece.Color.WHITE, Piece.Type.BISHOP);
-		verifyPiece(Piece.createWhiteQueen(), Piece.Color.WHITE, Piece.Type.QUEEN);
-		verifyPiece(Piece.createWhiteKing(), Piece.Color.WHITE, Piece.Type.KING);
-		verifyPiece(Piece.createBlackKnight(), Piece.Color.BLACK, Piece.Type.KNIGHT);
-		verifyPiece(Piece.createBlackBishop(), Piece.Color.BLACK, Piece.Type.BISHOP);
-		verifyPiece(Piece.createBlackQueen(), Piece.Color.BLACK, Piece.Type.QUEEN);
-		verifyPiece(Piece.createBlackKing(), Piece.Color.BLACK, Piece.Type.KING);
+		Position position = new Position(1, 1);
+		verifyPiece(Piece.createWhitePawn(position), Piece.createBlackPawn(position), Type.PAWN);
+		verifyPiece(Piece.createWhiteKnight(position), Piece.createBlackKnight(position), Type.KNIGHT);
+		verifyPiece(Piece.createWhiteRook(position), Piece.createBlackRook(position), Type.ROOK);
+		verifyPiece(Piece.createWhiteBishop(position), Piece.createBlackBishop(position), Type.BISHOP);
+		verifyPiece(Piece.createWhiteQueen(position), Piece.createBlackQueen(position), Type.QUEEN);
+		verifyPiece(Piece.createWhiteKing(position), Piece.createBlackKing(position), Type.KING);
 
-		verifyPiece(Piece.createWhitePawn(), Piece.createBlackPawn(), Type.PAWN);
-		verifyPiece(Piece.createWhiteKnight(), Piece.createBlackKnight(), Type.KNIGHT);
-		verifyPiece(Piece.createWhiteRook(), Piece.createBlackRook(), Type.ROOK);
-		verifyPiece(Piece.createWhiteBishop(), Piece.createBlackBishop(), Type.BISHOP);
-		verifyPiece(Piece.createWhiteQueen(), Piece.createBlackQueen(), Type.QUEEN);
-		verifyPiece(Piece.createWhiteKing(), Piece.createBlackKing(), Type.KING);
-
-		Piece blank = Piece.createBlank();
+		Piece blank = Piece.createBlank(position);
 		assertFalse(blank.isWhite());
 		assertFalse(blank.isBlack());
 		assertEquals(Type.NO_PIECE, blank.getType());
-	}
-
-	private void verifyPiece(Piece piece, Color color, Type type) {
-		assertEquals(color, piece.getColor());
-		if (Piece.Color.WHITE.equals(color)) {
-			assertEquals(type.getWhiteRepresentation(), piece.getRepresentation());
-			return;
-		}
-		assertEquals(type.getBlackRepresentation(), piece.getRepresentation());
-	}
-
-	@Test
-	public void check_piece_color() throws Exception {
-		Piece blackRook = Piece.createBlackRook();
-		Piece whiteRook = Piece.createWhiteRook();
-		assertTrue(blackRook.isBlack());
-		assertFalse(blackRook.isWhite());
-		assertFalse(whiteRook.isBlack());
-		assertTrue(whiteRook.isWhite());
-	}
-
-	@Test
-	public void getRepresentationPerPiece() throws Exception {
-		assertEquals('p', Piece.Type.PAWN.getWhiteRepresentation());
-		assertEquals('P', Piece.Type.PAWN.getBlackRepresentation());
 	}
 
 	private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final Type type) {
@@ -70,8 +35,14 @@ public class PieceTest {
 	}
 
 	@Test
-	public void get_point() throws Exception {
-		Piece pawn = Piece.createWhitePawn();
-		assertEquals(pawn.getPoint(), Type.PAWN.getPoint(), 0.01);
+	public void isWhiteAndBlack() throws Exception {
+		Position position = new Position(1, 1);
+		Piece whitePawn = Piece.createWhitePawn(position);
+		assertTrue(whitePawn.isWhite());
+		assertEquals('p', whitePawn.getRepresentation());
+
+		Piece blackPawn = Piece.createBlackPawn(position);
+		assertTrue(blackPawn.isBlack());
+		assertEquals('P', blackPawn.getRepresentation());
 	}
 }

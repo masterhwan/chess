@@ -9,7 +9,10 @@ public class PositionTest {
 	@Test
 	public void create_position() throws Exception {
 		Position position = new Position("a1");
-		assertEquals(0, position.getXpos());
-		assertEquals(0, position.getYpos());
+		assertEquals(1, position.getX());
+		assertEquals(1, position.getY());
+		
+		assertEquals(0, position.getXIndex());
+		assertEquals(0, position.getYIndex());
 	}
 }

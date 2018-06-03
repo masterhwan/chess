@@ -1,34 +1,73 @@
 package chess;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Position {
 
-	private int xPos;
-	private int yPos;
-
-	public Position() {
-
-	}
+	private int x;
+	private int y;
 
 	public Position(String position) {
-		char x = position.charAt(0);
-		xPos = x - 'a';
-		char y = position.charAt(1);
-		yPos = Character.getNumericValue(y) - 1;
+		this.x = position.charAt(0) - 'a' + 1;
+		this.y = Character.getNumericValue(position.charAt(1));
 	}
 
-	public int getXpos() {
-		return xPos;
+	public Position(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
-	public int getYpos() {
-		return yPos;
+	public int getXIndex() {
+		return x - 1;
 	}
 
-	public void setPosition(String position) {
-		char x = position.charAt(0);
-		xPos = x - 'a';
-		char y = position.charAt(1);
-		yPos = Character.getNumericValue(y) - 1;
+	public int getYIndex() {
+		return y - 1;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Position other = (Position) obj;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Position [xPos=" + x + ", yPos=" + y + "]";
+	}
+
+	public List<Position> getColumnNeighbors() {
+		return Arrays.asList(
+				new Position(getXIndex(), getYIndex() - 1),
+				new Position(getXIndex(), getYIndex() + 1));
 	}
 
 }
