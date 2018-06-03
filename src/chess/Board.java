@@ -8,7 +8,6 @@ import piece.Piece.Color;
 import piece.Piece.Type;
 
 public class Board {
-	private String returnLine = System.getProperty("line.separator");
 	private List<Rank> ranks = new ArrayList<>();
 
 	public void emptyInitialize() {
@@ -26,18 +25,6 @@ public class Board {
 		ranks.add(Rank.initializeBlankLine(6));
 		ranks.add(Rank.initializeBlackPawns(7));
 		ranks.add(Rank.initializeBlackPieces(8));
-	}
-
-	public String showBoard() {
-		return print();
-	}
-
-	private String print() {
-		StringBuffer bf = new StringBuffer();
-		for (int i = 7; i >= 0; i--) {
-			bf.append(ranks.get(i).getRankRepresentation() + returnLine);
-		}
-		return bf.toString();
 	}
 
 	public int pieceCount() {
@@ -103,6 +90,14 @@ public class Board {
 
 	private Piece findPiece(Position sourcePosition) {
 		return findRank(ranks.get(sourcePosition.getYIndex()), sourcePosition.getXIndex());
+	}
+
+	public void setRanks(List<Rank> ranks) {
+		this.ranks = ranks;
+	}
+
+	public List<Rank> getRanks() {
+		return ranks;
 	}
 
 }

@@ -20,14 +20,6 @@ public class BoardTest {
 	}
 
 	@Test
-	public void show() throws Exception {
-		board.initialize();
-		assertEquals(64, board.pieceCount());
-		assertEquals(appendNewLine("RNBQKBNR") + appendNewLine("PPPPPPPP") + blankRank + blankRank + blankRank
-				+ blankRank + appendNewLine("pppppppp") + appendNewLine("rnbqkbnr"), board.showBoard());
-	}
-
-	@Test
 	public void countPieceByColorAndType() throws Exception {
 		board.initialize();
 		assertEquals(8, board.countPieceByColorAndType(Color.WHITE, Type.PAWN));
@@ -43,7 +35,6 @@ public class BoardTest {
 		assertEquals(Piece.createWhiteRook(new Position("a1")), board.findPiece("a1"));
 		assertEquals(Piece.createWhiteRook(new Position("h1")), board.findPiece("h1"));
 		assertEquals(Piece.createBlank(new Position("c4")), board.findPiece("c4"));
-		System.out.println(board.showBoard());
 	}
 
 	@Test
@@ -62,7 +53,6 @@ public class BoardTest {
 
 		board.move(sourcePosition, targetPosition);
 
-		System.out.println(board.showBoard());
 	}
 
 	@Test
@@ -78,8 +68,6 @@ public class BoardTest {
 		addPiece(Piece.createWhitePawn(new Position("g2")));
 		addPiece(Piece.createWhiteRook(new Position("e1")));
 		addPiece(Piece.createWhiteKing(new Position("f1")));
-
-		System.out.println(board.showBoard());
 
 		assertEquals(15.0, board.caculcatePoint(Color.BLACK), 0.01);
 		assertEquals(7.0, board.caculcatePoint(Color.WHITE), 0.01);
