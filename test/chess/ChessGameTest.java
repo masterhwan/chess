@@ -7,9 +7,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import piece.Blank;
+import piece.King;
+import piece.Pawn;
 import piece.Piece;
 import piece.Piece.Color;
 import piece.Piece.Type;
+import piece.Queen;
+import piece.Rook;
 
 public class ChessGameTest {
 
@@ -25,15 +30,15 @@ public class ChessGameTest {
 	@Test
 	public void calculate_point() throws Exception {
 		board.emptyInitialize();
-		addPiece(Piece.createBlackPawn(new Position("b6")));
-		addPiece(Piece.createBlackQueen(new Position("e6")));
-		addPiece(Piece.createBlackKing(new Position("b8")));
-		addPiece(Piece.createBlackRook(new Position("c8")));
+		addPiece(Pawn.createBlackPawn(new Position("b6")));
+		addPiece(Queen.createBlackQueen(new Position("e6")));
+		addPiece(King.createBlackKing(new Position("b8")));
+		addPiece(Rook.createBlackRook(new Position("c8")));
 
-		addPiece(Piece.createWhitePawn(new Position("f2")));
-		addPiece(Piece.createWhitePawn(new Position("g2")));
-		addPiece(Piece.createWhiteRook(new Position("e1")));
-		addPiece(Piece.createWhiteKing(new Position("f1")));
+		addPiece(Pawn.createWhitePawn(new Position("f2")));
+		addPiece(Pawn.createWhitePawn(new Position("g2")));
+		addPiece(Rook.createWhiteRook(new Position("e1")));
+		addPiece(King.createWhiteKing(new Position("f1")));
 		assertEquals(15, chessGame.calculatePoint(Color.BLACK), 0.01);
 		assertEquals(7, chessGame.calculatePoint(Color.WHITE), 0.01);
 	}
@@ -42,14 +47,14 @@ public class ChessGameTest {
 	public void calculate_point_pawn() throws Exception {
 		board.emptyInitialize();
 
-		addPiece(Piece.createBlackPawn(new Position("b1")));
-		addPiece(Piece.createBlackPawn(new Position("b2")));
-		addPiece(Piece.createBlackPawn(new Position("b3")));
-		addPiece(Piece.createBlackPawn(new Position("b4")));
-		addPiece(Piece.createBlackPawn(new Position("b5")));
-		addPiece(Piece.createBlackPawn(new Position("b6")));
-		addPiece(Piece.createBlackPawn(new Position("b7")));
-		addPiece(Piece.createBlackPawn(new Position("b8")));
+		addPiece(Pawn.createBlackPawn(new Position("b1")));
+		addPiece(Pawn.createBlackPawn(new Position("b2")));
+		addPiece(Pawn.createBlackPawn(new Position("b3")));
+		addPiece(Pawn.createBlackPawn(new Position("b4")));
+		addPiece(Pawn.createBlackPawn(new Position("b5")));
+		addPiece(Pawn.createBlackPawn(new Position("b6")));
+		addPiece(Pawn.createBlackPawn(new Position("b7")));
+		addPiece(Pawn.createBlackPawn(new Position("b8")));
 
 		assertEquals(4, chessGame.calculatePoint(Color.BLACK), 0.01);
 	}
@@ -66,8 +71,8 @@ public class ChessGameTest {
 
 		chessGame.move(sourcePosition, targetPosition);
 
-		assertEquals(Piece.createBlank(new Position(sourcePosition)), chessGame.findPiece(sourcePosition));
-		assertEquals(Piece.createWhitePawn(new Position(targetPosition)), chessGame.findPiece(targetPosition));
+		assertEquals(Blank.createBlank(new Position(sourcePosition)), chessGame.findPiece(sourcePosition));
+		assertEquals(Pawn.createWhitePawn(new Position(targetPosition)), chessGame.findPiece(targetPosition));
 
 	}
 
@@ -82,11 +87,11 @@ public class ChessGameTest {
 	@Test
 	public void find_piece() throws Exception {
 		board.initialize();
-		assertEquals(Piece.createBlackRook(new Position("a8")), chessGame.findPiece("a8"));
-		assertEquals(Piece.createBlackRook(new Position("h8")), chessGame.findPiece("h8"));
-		assertEquals(Piece.createWhiteRook(new Position("a1")), chessGame.findPiece("a1"));
-		assertEquals(Piece.createWhiteRook(new Position("h1")), chessGame.findPiece("h1"));
-		assertEquals(Piece.createBlank(new Position("c4")), chessGame.findPiece("c4"));
+		assertEquals(Rook.createBlackRook(new Position("a8")), chessGame.findPiece("a8"));
+		assertEquals(Rook.createBlackRook(new Position("h8")), chessGame.findPiece("h8"));
+		assertEquals(Rook.createWhiteRook(new Position("a1")), chessGame.findPiece("a1"));
+		assertEquals(Rook.createWhiteRook(new Position("h1")), chessGame.findPiece("h1"));
+		assertEquals(Blank.createBlank(new Position("c4")), chessGame.findPiece("c4"));
 	}
 
 	@Test
@@ -94,7 +99,7 @@ public class ChessGameTest {
 		board.initialize();
 		Piece piece = chessGame.findPiece("e1");
 		assertEquals(Type.KING, piece.getType());
-		List<Position> positions = piece.getPosition().getPieceMovementAble(piece.getType());
+		List<Position> positions = piece.getPosition().getKingMovementAble();
 		String targetPosition = "e2";
 		assertTrue(positions.contains(new Position(targetPosition)));
 		targetPosition = "e8";
@@ -104,11 +109,10 @@ public class ChessGameTest {
 	@Test
 	public void check_queen_movement() throws Exception {
 		board.emptyInitialize();
-		addPiece(Piece.createBlackQueen(new Position("d5")));
+		addPiece(Queen.createBlackQueen(new Position("d5")));
 		Piece piece = chessGame.findPiece("d5");
 		assertEquals(Type.QUEEN, piece.getType());
-		List<Position> positions = piece.getPosition().getPieceMovementAble(piece.getType());
-		System.out.println(positions);
+		List<Position> positions = piece.getPosition().getQueenMovementAble();
 		String targetPosition = "d8";
 		assertTrue(positions.contains(new Position(targetPosition)));
 		targetPosition = "d1";
@@ -126,4 +130,5 @@ public class ChessGameTest {
 		targetPosition = "g8";
 		assertTrue(positions.contains(new Position(targetPosition)));
 	}
+
 }

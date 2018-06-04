@@ -84,58 +84,6 @@ public class Piece {
 		return this.color == Color.WHITE;
 	}
 
-	public static Piece createWhitePawn(Position position) {
-		return new Piece(Color.WHITE, Type.PAWN, position);
-	}
-
-	public static Piece createBlackPawn(Position position) {
-		return new Piece(Color.BLACK, Type.PAWN, position);
-	}
-
-	public static Piece createWhiteKnight(Position position) {
-		return new Piece(Color.WHITE, Type.KNIGHT, position);
-	}
-
-	public static Piece createBlackKnight(Position position) {
-		return new Piece(Color.BLACK, Type.KNIGHT, position);
-	}
-
-	public static Piece createWhiteRook(Position position) {
-		return new Piece(Color.WHITE, Type.ROOK, position);
-	}
-
-	public static Piece createBlackRook(Position position) {
-		return new Piece(Color.BLACK, Type.ROOK, position);
-	}
-
-	public static Piece createWhiteBishop(Position position) {
-		return new Piece(Color.WHITE, Type.BISHOP, position);
-	}
-
-	public static Piece createBlackBishop(Position position) {
-		return new Piece(Color.BLACK, Type.BISHOP, position);
-	}
-
-	public static Piece createWhiteQueen(Position position) {
-		return new Piece(Color.WHITE, Type.QUEEN, position);
-	}
-
-	public static Piece createBlackQueen(Position position) {
-		return new Piece(Color.BLACK, Type.QUEEN, position);
-	}
-
-	public static Piece createWhiteKing(Position position) {
-		return new Piece(Color.WHITE, Type.KING, position);
-	}
-
-	public static Piece createBlackKing(Position position) {
-		return new Piece(Color.BLACK, Type.KING, position);
-	}
-
-	public static Piece createBlank(Position position) {
-		return new Piece(Color.NOCOLOR, Type.NO_PIECE, position);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -188,10 +136,10 @@ public class Piece {
 		}
 		List<Position> positions = this.position.getNeighborhoodColumn();
 		for (Position index : positions) {
-			if (pieces.contains(new Piece(this.color, this.type, index))) {
+			if (pieces.contains(Pawn.create(this.color, index))) {
 				return getPoint() - 0.5;
 			}
-
+			System.out.println("\n");
 		}
 		return getPoint();
 	}

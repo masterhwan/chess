@@ -3,6 +3,7 @@ package chess;
 import java.util.ArrayList;
 import java.util.List;
 
+import piece.Blank;
 import piece.Piece;
 import piece.Piece.Color;
 import piece.Piece.Type;
@@ -39,12 +40,12 @@ public class ChessGame {
 	public void move(String sourcePosition, String target_position) {
 		Piece piece = findPiece(sourcePosition);
 		movePiece(target_position, piece);
-		replaceBlank(sourcePosition, Piece.createBlank(new Position(sourcePosition)));
+		replaceBlank(sourcePosition, Blank.createBlank(new Position(sourcePosition)));
 	}
 
 	private void replaceBlank(String sourcePosition, Piece piece) {
 		Position position = new Position(sourcePosition);
-		ranks.get(position.getYIndex()).setPiece(position.getXIndex(), Piece.createBlank(position));
+		ranks.get(position.getYIndex()).setPiece(position.getXIndex(), Blank.createBlank(position));
 	}
 
 	private void movePiece(String targetPosition, Piece piece) {

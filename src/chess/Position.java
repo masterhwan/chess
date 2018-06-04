@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import piece.Piece.Type;
-
 public class Position {
 
 	private int x;
@@ -41,34 +39,13 @@ public class Position {
 		return Arrays.asList(new Position(this.x, this.y + 1), new Position(this.x, this.y - 1));
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
-		return result;
+
+	public List<Position> getKingMovementAble() {
+		return getKingMovement();
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Position other = (Position) obj;
-		if (x != other.x)
-			return false;
-		if (y != other.y)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Position [xPos=" + x + ", yPos=" + y + "]";
+	public List<Position> getQueenMovementAble() {
+		return getQueenMovement();
 	}
 
 	private List<Position> getKingMovement() {
@@ -76,15 +53,6 @@ public class Position {
 				new Position(this.x + 1, this.y + 1), new Position(this.x - 1, this.y),
 				new Position(this.x + 1, this.y), new Position(this.x - 1, this.y - 1),
 				new Position(this.x, this.y - 1), new Position(this.x + 1, this.y - 1));
-	}
-
-	public List<Position> getPieceMovementAble(Type type) {
-		if (type == Type.KING) {
-			return getKingMovement();
-		} else if (type == Type.QUEEN) {
-			return getQueenMovement();
-		}
-		return Arrays.asList();
 	}
 
 	private List<Position> getQueenMovement() {
@@ -180,4 +148,35 @@ public class Position {
 		positions.addAll(decreaseXHorizeMovement(x - 1));
 		return positions;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Position other = (Position) obj;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Position [xPos=" + x + ", yPos=" + y + "]";
+	}
+
 }
