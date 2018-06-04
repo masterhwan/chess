@@ -131,10 +131,18 @@ public class Rank {
 		return rank;
 	}
 
-	public double getPoint(Color color) {
+	public ArrayList<Piece> findPieceByColor(Color color) {
+		ArrayList<Piece> piecesByColor = new ArrayList<>();
+		for (Piece index : pieces) {
+			index.findPieceByColor(color, piecesByColor);
+		}
+		return piecesByColor;
+	}
+
+	public double getPoint(List<Piece> pieces) {
 		double point = 0;
 		for (Piece index : pieces) {
-			point += index.getPoint(color);
+			point += index.getPoint();
 		}
 		return point;
 	}

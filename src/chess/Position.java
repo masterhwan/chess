@@ -65,9 +65,11 @@ public class Position {
 	}
 
 	public List<Position> getColumnNeighbors() {
-		return Arrays.asList(
-				new Position(getXIndex(), getYIndex() - 1),
-				new Position(getXIndex(), getYIndex() + 1));
+		return Arrays.asList(new Position(getX(), getY() - 1), new Position(getX(), getY() + 1));
+	}
+
+	public List<Position> getNeighborhoodColumn() {
+		return Arrays.asList(new Position(this.x, this.y + 1), new Position(this.x, this.y - 1));
 	}
 
 }

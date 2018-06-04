@@ -11,8 +11,6 @@ import piece.Piece.Type;
 
 public class BoardTest {
 	Board board;
-	String returnLine = System.getProperty("line.separator");
-	String blankRank = appendNewLine("........");
 
 	@Before
 	public void setUp() {
@@ -54,50 +52,4 @@ public class BoardTest {
 		board.move(sourcePosition, targetPosition);
 
 	}
-
-	@Test
-	public void caculcatePoint() throws Exception {
-		board.emptyInitialize();
-
-		addPiece(Piece.createBlackPawn(new Position("b6")));
-		addPiece(Piece.createBlackQueen(new Position("e6")));
-		addPiece(Piece.createBlackKing(new Position("b8")));
-		addPiece(Piece.createBlackRook(new Position("c8")));
-
-		addPiece(Piece.createWhitePawn(new Position("f2")));
-		addPiece(Piece.createWhitePawn(new Position("g2")));
-		addPiece(Piece.createWhiteRook(new Position("e1")));
-		addPiece(Piece.createWhiteKing(new Position("f1")));
-
-		assertEquals(15.0, board.caculcatePoint(Color.BLACK), 0.01);
-		assertEquals(7.0, board.caculcatePoint(Color.WHITE), 0.01);
-
-	}
-
-	// @Test
-	// public void caculcatePoint_pawn() throws Exception {
-	// board.emptyInitialize();
-	//
-	// addPiece(Piece.createBlackPawn(new Position("b1")));
-	// addPiece(Piece.createBlackPawn(new Position("b2")));
-	// addPiece(Piece.createBlackPawn(new Position("b3")));
-	// addPiece(Piece.createBlackPawn(new Position("b4")));
-	// addPiece(Piece.createBlackPawn(new Position("b5")));
-	// addPiece(Piece.createBlackPawn(new Position("b6")));
-	// addPiece(Piece.createBlackPawn(new Position("b7")));
-	// addPiece(Piece.createBlackPawn(new Position("b8")));
-	//
-	// assertEquals(4, board.caculcatePoint(Color.BLACK), 0.01);
-	// }
-
-	private void addPiece(Piece piece) {
-		board.move(piece.getPosition(), piece);
-	}
-
-	private String appendNewLine(String string) {
-		StringBuffer bf = new StringBuffer();
-		bf.append(string);
-		return bf.toString() + returnLine;
-	}
-
 }

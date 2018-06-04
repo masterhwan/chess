@@ -53,14 +53,6 @@ public class Board {
 		rank.setPiece(xpos, piece);
 	}
 
-	public double caculcatePoint(Color color) {
-		double point = 0;
-		for (Rank index : ranks) {
-			point += index.getPoint(color);
-		}
-		return point;
-	}
-
 	public int countPieceByColorAndType(Color color, Type type) {
 		int count = 0;
 		for (Rank index : ranks) {

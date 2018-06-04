@@ -1,5 +1,8 @@
 package piece;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import chess.Position;
 
 public class Piece {
@@ -51,13 +54,6 @@ public class Piece {
 
 	private boolean matchType(Type type) {
 		return this.type == type;
-	}
-
-	public double getPoint(Color color) {
-		if (this.color == color) {
-			return this.getPoint();
-		}
-		return 0;
 	}
 
 	public Color getColor() {
@@ -176,18 +172,27 @@ public class Piece {
 		return "Piece [color=" + color + ", type=" + type + ", position=" + position + "]";
 	}
 
-	// public double getPoint(List<Piece> pieces) {
-	// if (!macthType(Type.PAWN)) {
-	// return this.type.getPoint();
-	// }
-	// return Type.PAWN.getPoint();
-	// }
-
-	// private boolean macthType(Type type) {
-	// return this.type == type;
-	// }
-
 	public void setPosition(Position targetPosition) {
 		this.position = targetPosition;
+	}
+
+	public void findPieceByColor(Color color, ArrayList<Piece> piecesByColor) {
+		if (matchColor(color)) {
+			piecesByColor.add(this);
+		}
+	}
+
+	public double getPoint(List<Piece> pieces) {
+		if (!matchType(Type.PAWN)) {
+			return getPoint();
+		}
+		List<Position> positions = this.position.getColumnNeighbors();
+		for (Position index : positions) {
+			if (pieces.contains(new Piece(this.color, this.type, index))) {
+				return getPoint() - 0.5;
+			}
+
+		}
+		return getPoint();
 	}
 }
