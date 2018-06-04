@@ -3,7 +3,7 @@ package chess;
 import java.util.List;
 
 public class ChessView {
-	String returnLine = System.getProperty("line.separator");
+	private String returnLine = System.getProperty("line.separator");
 
 	private List<Rank> ranks;
 

@@ -52,7 +52,7 @@ public class Piece {
 		return this.color == color;
 	}
 
-	private boolean matchType(Type type) {
+	public boolean matchType(Type type) {
 		return this.type == type;
 	}
 
@@ -186,7 +186,7 @@ public class Piece {
 		if (!matchType(Type.PAWN)) {
 			return getPoint();
 		}
-		List<Position> positions = this.position.getColumnNeighbors();
+		List<Position> positions = this.position.getNeighborhoodColumn();
 		for (Position index : positions) {
 			if (pieces.contains(new Piece(this.color, this.type, index))) {
 				return getPoint() - 0.5;

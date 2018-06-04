@@ -3,10 +3,6 @@ package chess;
 import java.util.ArrayList;
 import java.util.List;
 
-import piece.Piece;
-import piece.Piece.Color;
-import piece.Piece.Type;
-
 public class Board {
 	private List<Rank> ranks = new ArrayList<>();
 
@@ -27,69 +23,7 @@ public class Board {
 		ranks.add(Rank.initializeBlackPieces(8));
 	}
 
-	public int pieceCount() {
-		int size = 0;
-		for (Rank index : ranks) {
-			size += index.size();
-		}
-		return size;
-	}
-
-	public Piece findPiece(String inputPosition) {
-		Position position = new Position(inputPosition);
-		return findRank(ranks.get(position.getYIndex()), position.getXIndex());
-	}
-
-	private Piece findRank(Rank rank, int xpos) {
-		return rank.findPiece(xpos);
-	}
-
-	public void move(String inputPosition, Piece piece) {
-		Position position = new Position(inputPosition);
-		setPiece(ranks.get(position.getYIndex()), position.getXIndex(), piece);
-	}
-
-	private void setPiece(Rank rank, int xpos, Piece piece) {
-		rank.setPiece(xpos, piece);
-	}
-
-	public int countPieceByColorAndType(Color color, Type type) {
-		int count = 0;
-		for (Rank index : ranks) {
-			count += index.getPieceCount(color, type);
-		}
-		return count;
-	}
-
-	public void move(Position position, Piece piece) {
-		ranks.get(position.getYIndex()).setPiece(position.getXIndex(), piece);
-	}
-
-	public void move(String sourceposition, String targetposition) {
-		Position sourcePosition = new Position(sourceposition);
-		Position targetPosition = new Position(targetposition);
-
-		Piece piece = findPiece(sourcePosition);
-		piece.setPosition(targetPosition);
-		setPiece(ranks.get(targetPosition.getYIndex()), targetPosition.getXIndex(), piece);
-		setBlank(ranks.get(sourcePosition.getYIndex()), sourcePosition.getXIndex(),
-				Piece.createBlank(new Position(sourcePosition.getX(), sourcePosition.getY())));
-	}
-
-	private void setBlank(Rank rank, int xpos, Piece piece) {
-		rank.setPiece(xpos, piece);
-	}
-
-	private Piece findPiece(Position sourcePosition) {
-		return findRank(ranks.get(sourcePosition.getYIndex()), sourcePosition.getXIndex());
-	}
-
-	public void setRanks(List<Rank> ranks) {
-		this.ranks = ranks;
-	}
-
 	public List<Rank> getRanks() {
 		return ranks;
 	}
-
 }

@@ -33,6 +33,11 @@ public class Position {
 	public int getX() {
 		return x;
 	}
+	
+
+	public List<Position> getNeighborhoodColumn() {
+		return Arrays.asList(new Position(this.x, this.y + 1), new Position(this.x, this.y - 1));
+	}
 
 	@Override
 	public int hashCode() {
@@ -63,13 +68,4 @@ public class Position {
 	public String toString() {
 		return "Position [xPos=" + x + ", yPos=" + y + "]";
 	}
-
-	public List<Position> getColumnNeighbors() {
-		return Arrays.asList(new Position(getX(), getY() - 1), new Position(getX(), getY() + 1));
-	}
-
-	public List<Position> getNeighborhoodColumn() {
-		return Arrays.asList(new Position(this.x, this.y + 1), new Position(this.x, this.y - 1));
-	}
-
 }

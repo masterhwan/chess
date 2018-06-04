@@ -6,8 +6,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-		board.initialize();
+		ChessGame chessGame = new ChessGame(board.getRanks());
 		ChessView chessView = new ChessView(board.getRanks());
+		board.initialize();
 		String message = "start";
 		Scanner scanner = new Scanner(System.in);
 		while (!message.equals("end")) {
@@ -16,7 +17,7 @@ public class Main {
 			message = scanner.nextLine();
 			String[] command = message.split(" ");
 			if (command[0].equals("move")) {
-				board.move(command[1], command[2]);
+				chessGame.move(command[1], command[2]);
 			}
 		}
 		scanner.close();
