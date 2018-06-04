@@ -2,6 +2,8 @@ package chess;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,5 +87,38 @@ public class ChessGameTest {
 		assertEquals(Piece.createWhiteRook(new Position("a1")), chessGame.findPiece("a1"));
 		assertEquals(Piece.createWhiteRook(new Position("h1")), chessGame.findPiece("h1"));
 		assertEquals(Piece.createBlank(new Position("c4")), chessGame.findPiece("c4"));
+	}
+
+	@Test
+	public void check_king_movement() throws Exception {
+		board.initialize();
+		Piece piece = chessGame.findPiece("e1");
+		assertEquals(Type.KING, piece.getType());
+		List<Position> positions = piece.getPosition().getPieceMovementAble(piece.getType());
+		String targetPosition = "e2";
+		assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "e8";
+		assertFalse(positions.contains(new Position(targetPosition)));
+	}
+
+	@Test
+	public void check_queen_movement() throws Exception {
+		board.emptyInitialize();
+		addPiece(Piece.createBlackQueen(new Position("d5")));
+		Piece piece = chessGame.findPiece("d5");
+		assertEquals(Type.QUEEN, piece.getType());
+		List<Position> positions = piece.getPosition().getPieceMovementAble(piece.getType());
+		String targetPosition = "a1";
+//		System.out.println(positions);
+//		assertTrue(positions.contains(new Position(targetPosition)));
+//		targetPosition = "h1";
+//		assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "d8";
+		assertTrue(positions.contains(new Position(targetPosition)));
+
+		// targetPosition = "h4";
+		// assertTrue(positions.contains(new Position(targetPosition)));
+		// targetPosition = "a4";
+		// assertTrue(positions.contains(new Position(targetPosition)));
 	}
 }
