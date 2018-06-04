@@ -108,17 +108,22 @@ public class ChessGameTest {
 		Piece piece = chessGame.findPiece("d5");
 		assertEquals(Type.QUEEN, piece.getType());
 		List<Position> positions = piece.getPosition().getPieceMovementAble(piece.getType());
-		String targetPosition = "a1";
-//		System.out.println(positions);
-//		assertTrue(positions.contains(new Position(targetPosition)));
-//		targetPosition = "h1";
-//		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "d8";
+		System.out.println(positions);
+		String targetPosition = "d8";
 		assertTrue(positions.contains(new Position(targetPosition)));
-
-		// targetPosition = "h4";
-		// assertTrue(positions.contains(new Position(targetPosition)));
-		// targetPosition = "a4";
-		// assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "d1";
+		assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "a2";
+		assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "a5";
+		assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "h5";
+		assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "a8";
+		assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "h1";
+		assertTrue(positions.contains(new Position(targetPosition)));
+		targetPosition = "g8";
+		assertTrue(positions.contains(new Position(targetPosition)));
 	}
 }

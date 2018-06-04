@@ -2,7 +2,6 @@ package chess;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import piece.Piece.Type;
@@ -96,32 +95,45 @@ public class Position {
 		positions.addAll(increaseYVerticalMovement(this.y + 1));
 
 		positions.addAll(decreaseXDecreaseYDiagnalMovement(this.x - 1, this.y - 1));
-		// positions.addAll(decreaseXIncreaseYDiagnalMovement(this.x - 1, this.y + 1));
-		// positions.addAll(IncreaseXDecreaseYDiagnalMovement(this.x - 1, this.y - 1));
-		// positions.addAll(IncreaseXIncreaseYDiagnalMovement(this.x - 1, this.y - 1));
+		positions.addAll(decreaseXIncreaseYDiagnalMovement(this.x - 1, this.y + 1));
+		positions.addAll(IncreaseXDecreaseYDiagnalMovement(this.x + 1, this.y - 1));
+		positions.addAll(IncreaseXIncreaseYDiagnalMovement(this.x + 1, this.y + 1));
 		return positions;
 	}
 
-	private List<Position> IncreaseXIncreaseYDiagnalMovement(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+	private List<Position> IncreaseXIncreaseYDiagnalMovement(int x, int y) {
+		List<Position> positions = new ArrayList<>();
+		if (x == 8 || y == 8) {
+			return Arrays.asList(new Position(x, y));
+		}
+		positions.add(new Position(x, y));
+		positions.addAll(IncreaseXIncreaseYDiagnalMovement(x + 1, y + 1));
+		return positions;
 	}
 
-	private List<Position> IncreaseXDecreaseYDiagnalMovement(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+	private List<Position> IncreaseXDecreaseYDiagnalMovement(int x, int y) {
+		List<Position> positions = new ArrayList<>();
+		if (x == 8 || y == 1) {
+			return Arrays.asList(new Position(x, y));
+		}
+		positions.add(new Position(x, y));
+		positions.addAll(IncreaseXDecreaseYDiagnalMovement(x + 1, y - 1));
+		return positions;
 	}
 
-	private List<Position> decreaseXIncreaseYDiagnalMovement(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+	private List<Position> decreaseXIncreaseYDiagnalMovement(int x, int y) {
+		List<Position> positions = new ArrayList<>();
+		if (x == 1 || y == 8) {
+			return Arrays.asList(new Position(x, y));
+		}
+		positions.add(new Position(x, y));
+		positions.addAll(decreaseXIncreaseYDiagnalMovement(x - 1, y + 1));
+		return positions;
 	}
 
 	private List<Position> decreaseXDecreaseYDiagnalMovement(int x, int y) {
 		List<Position> positions = new ArrayList<>();
-		if (x == 0 || y == 0) {
-			return Arrays.asList();
-		} else if (x < 0 && y < 0) {
+		if (x == 1 || y == 1) {
 			return Arrays.asList(new Position(x, y));
 		}
 		positions.add(new Position(x, y));
@@ -141,13 +153,11 @@ public class Position {
 
 	private List<Position> decreaseYVerticalMovement(int y) {
 		List<Position> positions = new ArrayList<>();
-		if (y < 0) {
+		if (y == 1) {
 			return Arrays.asList(new Position(this.x, y));
-		} else if (y == 0) {
-			return Arrays.asList();
 		}
 		positions.add(new Position(this.x, y));
-		positions.addAll(increaseYVerticalMovement(y - 1));
+		positions.addAll(decreaseYVerticalMovement(y - 1));
 		return positions;
 	}
 
@@ -163,10 +173,8 @@ public class Position {
 
 	private List<Position> decreaseXHorizeMovement(int x) {
 		List<Position> positions = new ArrayList<>();
-		if (x < 0) {
+		if (x == 0) {
 			return Arrays.asList(new Position(x, this.y));
-		} else if (x == 0) {
-			return Arrays.asList();
 		}
 		positions.add(new Position(x, this.y));
 		positions.addAll(decreaseXHorizeMovement(x - 1));
