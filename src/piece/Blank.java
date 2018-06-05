@@ -11,9 +11,7 @@ public class Blank extends Piece {
 	}
 
 	@Override
-	public boolean verifyMovePosition() {
-		// TODO Auto-generated method stub
+	public boolean verifyMovePosition(Piece piece) {
 		return false;
 	}
-
 }

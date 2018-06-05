@@ -20,4 +20,15 @@ public class QueenTest {
 		assertTrue(blackPiece.isBlack());
 		assertEquals(type, blackPiece.getType());
 	}
+
+	@Test
+	public void verifyMovePosition() throws Exception {
+		Queen queen = Queen.createWhite(new Position("d4"));
+		assertTrue(queen.verifyMovePosition(Blank.create(new Position("a1"))));
+		assertTrue(queen.verifyMovePosition(Blank.create(new Position("a7"))));
+		assertTrue(queen.verifyMovePosition(Blank.create(new Position("h4"))));
+		assertTrue(queen.verifyMovePosition(Blank.create(new Position("h8"))));
+		assertTrue(queen.verifyMovePosition(Blank.create(new Position("d1"))));
+		assertTrue(queen.verifyMovePosition(Blank.create(new Position("d8"))));
+	}
 }

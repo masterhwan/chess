@@ -1,5 +1,7 @@
 package piece;
 
+import java.util.List;
+
 public class Bishop extends Piece {
 
 	private Bishop(Color color, Type type, Position position) {
@@ -15,8 +17,12 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public boolean verifyMovePosition() {
+	public boolean verifyMovePosition(Piece piece) {
+		Position position = this.getPosition();
+		List<Position> positions = position.getBishopMovementAble();
+		if (positions.contains(piece.getPosition())) {
+			return true;
+		}
 		return false;
 	}
-
 }

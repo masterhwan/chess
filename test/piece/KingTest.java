@@ -20,4 +20,11 @@ public class KingTest {
 		assertTrue(blackPiece.isBlack());
 		assertEquals(type, blackPiece.getType());
 	}
+
+	@Test
+	public void verifyMovePosition() throws Exception {
+		King king = King.createWhite(new Position("f5"));
+		assertTrue(king.verifyMovePosition(Blank.create(new Position("f6"))));
+		assertTrue(king.verifyMovePosition(Blank.create(new Position("e5"))));
+	}
 }

@@ -1,8 +1,6 @@
 package chess;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,9 +9,9 @@ import piece.Blank;
 import piece.King;
 import piece.Pawn;
 import piece.Piece;
-import piece.Position;
 import piece.Piece.Color;
 import piece.Piece.Type;
+import piece.Position;
 import piece.Queen;
 import piece.Rook;
 
@@ -94,42 +92,4 @@ public class ChessGameTest {
 		assertEquals(Rook.createWhite(new Position("h1")), chessGame.findPiece("h1"));
 		assertEquals(Blank.create(new Position("c4")), chessGame.findPiece("c4"));
 	}
-
-	@Test
-	public void check_king_movement() throws Exception {
-		board.initialize();
-		Piece piece = chessGame.findPiece("e1");
-		assertEquals(Type.KING, piece.getType());
-		List<Position> positions = piece.getPosition().getKingMovementAble();
-		String targetPosition = "e2";
-		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "e8";
-		assertFalse(positions.contains(new Position(targetPosition)));
-	}
-
-	@Test
-	public void check_queen_movement() throws Exception {
-		board.emptyInitialize();
-		addPiece(Queen.createBlack(new Position("d5")));
-		Piece piece = chessGame.findPiece("d5");
-		assertEquals(Type.QUEEN, piece.getType());
-		List<Position> positions = piece.getPosition().getQueenMovementAble();
-		String targetPosition = "d8";
-		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "d1";
-		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "a2";
-		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "a5";
-		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "h5";
-		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "a8";
-		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "h1";
-		assertTrue(positions.contains(new Position(targetPosition)));
-		targetPosition = "g8";
-		assertTrue(positions.contains(new Position(targetPosition)));
-	}
-
 }

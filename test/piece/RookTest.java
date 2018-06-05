@@ -22,4 +22,12 @@ public class RookTest {
 		assertEquals(type, blackPiece.getType());
 	}
 
+	@Test
+	public void verifyMovePosition() throws Exception {
+		Rook rook = Rook.createWhite(new Position("d5"));
+		rook.verifyMovePosition(Blank.create(new Position("d8")));
+		rook.verifyMovePosition(Blank.create(new Position("d1")));
+		rook.verifyMovePosition(Blank.create(new Position("a5")));
+		rook.verifyMovePosition(Blank.create(new Position("h5")));
+	}
 }

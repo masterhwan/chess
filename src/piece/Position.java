@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import piece.Piece.Color;
+
 public class Position {
 
 	private int x;
@@ -39,7 +41,6 @@ public class Position {
 		return Arrays.asList(new Position(this.x, this.y + 1), new Position(this.x, this.y - 1));
 	}
 
-
 	public List<Position> getKingMovementAble() {
 		return getKingMovement();
 	}
@@ -49,10 +50,12 @@ public class Position {
 	}
 
 	private List<Position> getKingMovement() {
-		return Arrays.asList(new Position(this.x - 1, this.y + 1), new Position(this.x, this.y + 1),
-				new Position(this.x + 1, this.y + 1), new Position(this.x - 1, this.y),
-				new Position(this.x + 1, this.y), new Position(this.x - 1, this.y - 1),
-				new Position(this.x, this.y - 1), new Position(this.x + 1, this.y - 1));
+		List<Position> position = new ArrayList<>();
+		List<Direction> directions = Direction.everyDirection();
+		for (Direction index : directions) {
+			position.add(new Position(this.x + index.getX(), this.y + index.getY()));
+		}
+		return position;
 	}
 
 	private List<Position> getQueenMovement() {
@@ -177,6 +180,58 @@ public class Position {
 	@Override
 	public String toString() {
 		return "Position [xPos=" + x + ", yPos=" + y + "]";
+	}
+
+	public List<Position> getBishopMovementAble() {
+		List<Position> positions = new ArrayList<>();
+		positions.addAll(decreaseXDecreaseYDiagnalMovement(this.x - 1, this.y - 1));
+		positions.addAll(decreaseXIncreaseYDiagnalMovement(this.x - 1, this.y + 1));
+		positions.addAll(IncreaseXDecreaseYDiagnalMovement(this.x + 1, this.y - 1));
+		positions.addAll(IncreaseXIncreaseYDiagnalMovement(this.x + 1, this.y + 1));
+		return positions;
+	}
+
+	public List<Position> getKnightMovementAble() {
+		List<Position> position = new ArrayList<>();
+		List<Direction> directions = Direction.knightDirection();
+		for (Direction index : directions) {
+			position.add(new Position(this.x + index.getX(), this.y + index.getY()));
+		}
+		return position;
+	}
+
+	public List<Position> getRookMovementAble() {
+		List<Position> positions = new ArrayList<>();
+		positions.addAll(decreaseXHorizeMovement(this.x - 1));
+		positions.addAll(increaseXHorizeMovement(this.x + 1));
+		positions.addAll(decreaseYVerticalMovement(this.y - 1));
+		positions.addAll(increaseYVerticalMovement(this.y + 1));
+		return positions;
+	}
+
+	public List<Position> getPawnMovementAble(Color color) {
+		if (color == Color.BLACK) {
+			return blackPawnMovement();
+		}
+		return whitePawnMovement();
+	}
+
+	private List<Position> whitePawnMovement() {
+		List<Position> position = new ArrayList<>();
+		List<Direction> directions = Direction.whitePawnDirection();
+		for (Direction index : directions) {
+			position.add(new Position(this.x + index.getX(), this.y + index.getY()));
+		}
+		return position;
+	}
+
+	private List<Position> blackPawnMovement() {
+		List<Position> position = new ArrayList<>();
+		List<Direction> directions = Direction.blackPawnDirection();
+		for (Direction index : directions) {
+			position.add(new Position(this.x + index.getX(), this.y + index.getY()));
+		}
+		return position;
 	}
 
 }

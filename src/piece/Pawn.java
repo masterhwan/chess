@@ -1,5 +1,7 @@
 package piece;
 
+import java.util.List;
+
 public class Pawn extends Piece {
 
 	private Pawn(Color color, Type type, Position position) {
@@ -19,9 +21,12 @@ public class Pawn extends Piece {
 	}
 
 	@Override
-	public boolean verifyMovePosition() {
-		// TODO Auto-generated method stub
+	public boolean verifyMovePosition(Piece piece) {
+		Position position = this.getPosition();
+		List<Position> positions = position.getPawnMovementAble(this.getColor());
+		if (positions.contains(piece.getPosition())) {
+			return true;
+		}
 		return false;
 	}
-
 }

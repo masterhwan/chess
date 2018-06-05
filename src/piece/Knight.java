@@ -1,5 +1,7 @@
 package piece;
 
+import java.util.List;
+
 public class Knight extends Piece {
 
 	private Knight(Color color, Type type, Position position) {
@@ -15,9 +17,12 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public boolean verifyMovePosition() {
-		// TODO Auto-generated method stub
+	public boolean verifyMovePosition(Piece piece) {
+		Position position = this.getPosition();
+		List<Position> positions = position.getKnightMovementAble();
+		if (positions.contains(piece.getPosition())) {
+			return true;
+		}
 		return false;
 	}
-
 }

@@ -1,7 +1,5 @@
 package piece;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class DirectionTest {

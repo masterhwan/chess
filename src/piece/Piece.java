@@ -32,7 +32,7 @@ public abstract class Piece {
 		}
 	}
 
-	abstract public boolean verifyMovePosition();
+	abstract public boolean verifyMovePosition(Piece piece);
 
 	private Color color;
 	private Type type;
