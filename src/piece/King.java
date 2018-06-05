@@ -1,19 +1,23 @@
 package piece;
 
-import chess.Position;
-
 public class King extends Piece {
 
 	public King(Color color, Type type, Position position) {
 		super(color, type, position);
 	}
 
-	public static King createWhiteKing(Position position) {
+	public static King createWhite(Position position) {
 		return new King(Color.WHITE, Type.KING, position);
 	}
 
-	public static King createBlackKing(Position position) {
+	public static King createBlack(Position position) {
 		return new King(Color.BLACK, Type.KING, position);
+	}
+
+	@Override
+	public boolean verifyMovePosition() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

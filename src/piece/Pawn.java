@@ -1,7 +1,5 @@
 package piece;
 
-import chess.Position;
-
 public class Pawn extends Piece {
 
 	private Pawn(Color color, Type type, Position position) {
@@ -12,12 +10,18 @@ public class Pawn extends Piece {
 		return new Pawn(color, Type.PAWN, position);
 	}
 
-	public static Pawn createBlackPawn(Position position) {
+	public static Pawn createBlack(Position position) {
 		return new Pawn(Color.BLACK, Type.PAWN, position);
 	}
 
-	public static Pawn createWhitePawn(Position position) {
+	public static Pawn createWhite(Position position) {
 		return new Pawn(Color.WHITE, Type.PAWN, position);
+	}
+
+	@Override
+	public boolean verifyMovePosition() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -5,14 +5,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import chess.Position;
 import piece.Piece.Type;
 
 public class RookTest {
 	@Test
 	public void create_rook() throws Exception {
 		Position position = new Position(1, 1);
-		verifyPiece(Rook.createWhiteRook(position), Rook.createBlackRook(position), Type.ROOK);
+		verifyPiece(Rook.createWhite(position), Rook.createBlack(position), Type.ROOK);
 	}
 
 	private void verifyPiece(Rook whitePiece, Rook blackPiece, Type type) {

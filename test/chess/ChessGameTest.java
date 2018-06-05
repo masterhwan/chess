@@ -11,6 +11,7 @@ import piece.Blank;
 import piece.King;
 import piece.Pawn;
 import piece.Piece;
+import piece.Position;
 import piece.Piece.Color;
 import piece.Piece.Type;
 import piece.Queen;
@@ -30,15 +31,15 @@ public class ChessGameTest {
 	@Test
 	public void calculate_point() throws Exception {
 		board.emptyInitialize();
-		addPiece(Pawn.createBlackPawn(new Position("b6")));
-		addPiece(Queen.createBlackQueen(new Position("e6")));
-		addPiece(King.createBlackKing(new Position("b8")));
-		addPiece(Rook.createBlackRook(new Position("c8")));
+		addPiece(Pawn.createBlack(new Position("b6")));
+		addPiece(Queen.createBlack(new Position("e6")));
+		addPiece(King.createBlack(new Position("b8")));
+		addPiece(Rook.createBlack(new Position("c8")));
 
-		addPiece(Pawn.createWhitePawn(new Position("f2")));
-		addPiece(Pawn.createWhitePawn(new Position("g2")));
-		addPiece(Rook.createWhiteRook(new Position("e1")));
-		addPiece(King.createWhiteKing(new Position("f1")));
+		addPiece(Pawn.createWhite(new Position("f2")));
+		addPiece(Pawn.createWhite(new Position("g2")));
+		addPiece(Rook.createWhite(new Position("e1")));
+		addPiece(King.createWhite(new Position("f1")));
 		assertEquals(15, chessGame.calculatePoint(Color.BLACK), 0.01);
 		assertEquals(7, chessGame.calculatePoint(Color.WHITE), 0.01);
 	}
@@ -47,14 +48,14 @@ public class ChessGameTest {
 	public void calculate_point_pawn() throws Exception {
 		board.emptyInitialize();
 
-		addPiece(Pawn.createBlackPawn(new Position("b1")));
-		addPiece(Pawn.createBlackPawn(new Position("b2")));
-		addPiece(Pawn.createBlackPawn(new Position("b3")));
-		addPiece(Pawn.createBlackPawn(new Position("b4")));
-		addPiece(Pawn.createBlackPawn(new Position("b5")));
-		addPiece(Pawn.createBlackPawn(new Position("b6")));
-		addPiece(Pawn.createBlackPawn(new Position("b7")));
-		addPiece(Pawn.createBlackPawn(new Position("b8")));
+		addPiece(Pawn.createBlack(new Position("b1")));
+		addPiece(Pawn.createBlack(new Position("b2")));
+		addPiece(Pawn.createBlack(new Position("b3")));
+		addPiece(Pawn.createBlack(new Position("b4")));
+		addPiece(Pawn.createBlack(new Position("b5")));
+		addPiece(Pawn.createBlack(new Position("b6")));
+		addPiece(Pawn.createBlack(new Position("b7")));
+		addPiece(Pawn.createBlack(new Position("b8")));
 
 		assertEquals(4, chessGame.calculatePoint(Color.BLACK), 0.01);
 	}
@@ -71,8 +72,8 @@ public class ChessGameTest {
 
 		chessGame.move(sourcePosition, targetPosition);
 
-		assertEquals(Blank.createBlank(new Position(sourcePosition)), chessGame.findPiece(sourcePosition));
-		assertEquals(Pawn.createWhitePawn(new Position(targetPosition)), chessGame.findPiece(targetPosition));
+		assertEquals(Blank.create(new Position(sourcePosition)), chessGame.findPiece(sourcePosition));
+		assertEquals(Pawn.createWhite(new Position(targetPosition)), chessGame.findPiece(targetPosition));
 
 	}
 
@@ -87,11 +88,11 @@ public class ChessGameTest {
 	@Test
 	public void find_piece() throws Exception {
 		board.initialize();
-		assertEquals(Rook.createBlackRook(new Position("a8")), chessGame.findPiece("a8"));
-		assertEquals(Rook.createBlackRook(new Position("h8")), chessGame.findPiece("h8"));
-		assertEquals(Rook.createWhiteRook(new Position("a1")), chessGame.findPiece("a1"));
-		assertEquals(Rook.createWhiteRook(new Position("h1")), chessGame.findPiece("h1"));
-		assertEquals(Blank.createBlank(new Position("c4")), chessGame.findPiece("c4"));
+		assertEquals(Rook.createBlack(new Position("a8")), chessGame.findPiece("a8"));
+		assertEquals(Rook.createBlack(new Position("h8")), chessGame.findPiece("h8"));
+		assertEquals(Rook.createWhite(new Position("a1")), chessGame.findPiece("a1"));
+		assertEquals(Rook.createWhite(new Position("h1")), chessGame.findPiece("h1"));
+		assertEquals(Blank.create(new Position("c4")), chessGame.findPiece("c4"));
 	}
 
 	@Test
@@ -109,7 +110,7 @@ public class ChessGameTest {
 	@Test
 	public void check_queen_movement() throws Exception {
 		board.emptyInitialize();
-		addPiece(Queen.createBlackQueen(new Position("d5")));
+		addPiece(Queen.createBlack(new Position("d5")));
 		Piece piece = chessGame.findPiece("d5");
 		assertEquals(Type.QUEEN, piece.getType());
 		List<Position> positions = piece.getPosition().getQueenMovementAble();

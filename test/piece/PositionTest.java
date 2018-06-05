@@ -1,8 +1,10 @@
-package chess;
+package piece;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import piece.Position;
 
 public class PositionTest {
 

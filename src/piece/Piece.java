@@ -3,9 +3,7 @@ package piece;
 import java.util.ArrayList;
 import java.util.List;
 
-import chess.Position;
-
-public class Piece {
+public abstract class Piece {
 	public enum Color {
 		BLACK, WHITE, NOCOLOR;
 	}
@@ -33,6 +31,8 @@ public class Piece {
 			return point;
 		}
 	}
+
+	abstract public boolean verifyMovePosition();
 
 	private Color color;
 	private Type type;

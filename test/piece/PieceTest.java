@@ -5,18 +5,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import chess.Position;
-
 public class PieceTest {
 
 	@Test
 	public void isWhiteAndBlack() throws Exception {
 		Position position = new Position(1, 1);
-		Piece whitePawn = Pawn.createWhitePawn(position);
+		Piece whitePawn = Pawn.createWhite(position);
 		assertTrue(whitePawn.isWhite());
 		assertEquals('p', whitePawn.getRepresentation());
 
-		Piece blackPawn = Pawn.createBlackPawn(position);
+		Piece blackPawn = Pawn.createBlack(position);
 		assertTrue(blackPawn.isBlack());
 		assertEquals('P', blackPawn.getRepresentation());
 	}
