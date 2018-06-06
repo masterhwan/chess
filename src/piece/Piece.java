@@ -161,4 +161,14 @@ public abstract class Piece {
 	public Degree degree(Piece target) {
 		return position.degree(target.position);
 	}
+
+	abstract public void move(Piece target);
+
+	public int getYIndex() {
+		return getPosition().getYIndex();
+	}
+
+	public int getXIndex() {
+		return getPosition().getXIndex();
+	}
 }

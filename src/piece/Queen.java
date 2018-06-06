@@ -26,11 +26,16 @@ public class Queen extends Piece {
 			throw new InvalidMovePositionException("같은 편의 위치로는 움직일 수 없음");
 		}
 
-
 		return direction;
 	}
 
 	private boolean isAlliance(Piece target) {
 		return getColor() == target.getColor();
+	}
+
+	@Override
+	public void move(Piece target) {
+		verifyMovePosition(target);
+		setPosition(target.getPosition());
 	}
 }

@@ -1,8 +1,9 @@
-package chess;
 
 import java.util.Scanner;
 
 import Exception.InvalidMovePositionException;
+import chess.ChessGame;
+import chess.ChessView;
 
 public class Main {
 
@@ -17,12 +18,12 @@ public class Main {
 		ChessGame chessGame = new ChessGame();
 		ChessView chessView = new ChessView();
 		while (true) {
-			String command = scanner.nextLine();
-			if (command.equals("start")) {
+			String message = scanner.nextLine();
+			if (message.equals("start")) {
 				chessGame.initialize();
 				System.out.println(chessView.view(chessGame.getBoard()));
-			} else if (command.startsWith("move")) {
-				String[] values = command.split(" ");
+			} else if (message.startsWith("move")) {
+				String[] values = message.split(" ");
 
 				try {
 					chessGame.move(values[1], values[2]);
@@ -30,13 +31,12 @@ public class Main {
 					System.out.println(e.getMessage());
 				}
 				System.out.println(chessView.view(chessGame.getBoard()));
-			} else if (command.equals("end")) {
+			} else if (message.equals("end")) {
 				break;
 			} else {
-				System.out.println(command + "는 지원하지 않는 명령어입니다.");
+				System.out.println(message + "는 지원하지 않는 명령어입니다.");
 			}
 		}
-
 		scanner.close();
 	}
 

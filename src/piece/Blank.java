@@ -19,4 +19,10 @@ public class Blank extends Piece {
 	public Direction verifyMovePosition(Piece piece) {
 		throw new InvalidMovePositionException("블랭크는 이동할 수 없습니다.");
 	}
+
+	@Override
+	public void move(Piece target) {
+		verifyMovePosition(target);
+		setPosition(target.getPosition());
+	}
 }

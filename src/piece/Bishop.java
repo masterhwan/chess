@@ -32,4 +32,10 @@ public class Bishop extends Piece {
 	private boolean isAlliance(Piece target) {
 		return getColor() == target.getColor();
 	}
+
+	@Override
+	public void move(Piece target) {
+		verifyMovePosition(target);
+		setPosition(target.getPosition());
+	}
 }

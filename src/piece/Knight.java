@@ -33,4 +33,10 @@ public class Knight extends Piece {
 		return getColor() == target.getColor();
 	}
 
+	@Override
+	public void move(Piece target) {
+		verifyMovePosition(target);
+		setPosition(target.getPosition());
+	}
+
 }
