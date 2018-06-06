@@ -5,61 +5,79 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import Exception.InvalidMovePositionException;
+import piece.Blank;
+import piece.King;
+import piece.Pawn;
 import piece.Piece;
 import piece.Piece.Color;
+import piece.Piece.Type;
+import piece.Position;
+import piece.Queen;
+import piece.Rook;
 
 public class BoardTest {
-	Board board;
-	String returnLine = System.getProperty("line.separator");
-	String blankRank = appendNewLine("........");
+	private String returnLine = System.getProperty("line.separator");
+
+	private Board board;
+	private ChessView chessView;
 
 	@Before
-	public void setUp() {
+	public void setup() {
 		board = new Board();
+		chessView = new ChessView();
 	}
 
 	@Test
-	public void show() throws Exception {
+	public void create() throws Exception {
 		board.initialize();
-		assertEquals(64, board.pieceCount());
+		String blankRank = appendNewLine("........");
 		assertEquals(appendNewLine("RNBQKBNR") + appendNewLine("PPPPPPPP") + blankRank + blankRank + blankRank
-				+ blankRank + appendNewLine("pppppppp") + appendNewLine("rnbqkbnr"), board.showBoard());
+				+ blankRank + appendNewLine("pppppppp") + appendNewLine("rnbqkbnr"), chessView.view(board));
+	}
+
+	private String appendNewLine(String string) {
+		return string + returnLine;
 	}
 
 	@Test
-	public void return_piece() throws Exception {
+	public void print() throws Exception {
 		board.initialize();
-		assertEquals(8, board.getBlackPawnCount());
-		assertEquals(2, board.getBlackRookPieceCount());
+		System.out.println(chessView.view(board));
 	}
 
 	@Test
-	public void find_piece() throws Exception {
+	public void countPieceByColorAndType() throws Exception {
 		board.initialize();
-		assertEquals(Piece.createBlackRook(), board.findPiece("a8"));
-		assertEquals(Piece.createBlackRook(), board.findPiece("h8"));
-		assertEquals(Piece.createWhiteRook(), board.findPiece("a1"));
-		assertEquals(Piece.createWhiteRook(), board.findPiece("h1"));
-		assertEquals(Piece.createBlank(), board.findPiece("c4"));
+
+		assertEquals(8, board.countPieceByColorAndType(Color.WHITE, Type.PAWN));
+		assertEquals(2, board.countPieceByColorAndType(Color.BLACK, Type.KNIGHT));
+		assertEquals(1, board.countPieceByColorAndType(Color.BLACK, Type.KING));
 	}
 
 	@Test
-	public void move() throws Exception {
+	public void findPiece() throws Exception {
+		board.initialize();
+
+		assertFindPiece(Rook.createBlack(new Position("a8")));
+		assertFindPiece(Rook.createBlack(new Position("h8")));
+		assertFindPiece(Rook.createWhite(new Position("a1")));
+		assertFindPiece(Rook.createWhite(new Position("h1")));
+	}
+
+	private void assertFindPiece(Piece piece) {
+		assertEquals(piece, board.findPiece(piece.getPosition()));
+	}
+
+	@Test
+	public void addPiece() throws Exception {
 		board.emptyInitialize();
 
-		String position = "b5";
-		Piece piece = Piece.createBlackRook();
-		board.move(position, piece);
-		assertEquals(piece, board.findPiece(position));
+		Position position = new Position("b5");
+		Rook piece = Rook.createBlack(position);
+		board.replacePiece(piece);
 
-		position = "b6";
-		piece = Piece.createBlackKing();
-		board.move(position, piece);
-		assertEquals(piece, board.findPiece(position));
-
-		position = "e3";
-		piece = Piece.createWhiteKing();
-		board.move(position, piece);
+		System.out.println(chessView.view(board));
 		assertEquals(piece, board.findPiece(position));
 	}
 
@@ -67,38 +85,56 @@ public class BoardTest {
 	public void caculcatePoint() throws Exception {
 		board.emptyInitialize();
 
-		addPiece("b6", Piece.createBlackPawn());
-		addPiece("a7", Piece.createBlackPawn());
-		addPiece("c7", Piece.createBlackPawn());
-		addPiece("d7", Piece.createBlackBishop());
-		addPiece("e6", Piece.createBlackQueen());
-		addPiece("b8", Piece.createBlackKing());
-		addPiece("c8", Piece.createBlackRook());
+		addPiece(Pawn.createBlack(new Position("b6")));
+		addPiece(Queen.createBlack(new Position("e6")));
+		addPiece(King.createBlack(new Position("b8")));
+		addPiece(Rook.createBlack(new Position("c8")));
 
-		addPiece("f4", Piece.createWhiteKnight());
-		addPiece("g4", Piece.createWhiteQueen());
-		addPiece("f2", Piece.createWhitePawn());
-		addPiece("f3", Piece.createWhitePawn());
-		addPiece("h3", Piece.createWhitePawn());
-		addPiece("g2", Piece.createWhitePawn());
-		addPiece("e1", Piece.createWhiteRook());
-		addPiece("f1", Piece.createWhiteKing());
+		addPiece(Pawn.createWhite(new Position("f2")));
+		addPiece(Pawn.createWhite(new Position("g2")));
+		addPiece(Rook.createWhite(new Position("e1")));
+		addPiece(King.createBlack(new Position("f1")));
 
-		System.out.println(board.showBoard());
+		assertEquals(15.0, board.caculcatePoint(Color.BLACK), 0.01);
+		assertEquals(7.0, board.caculcatePoint(Color.WHITE), 0.01);
 
-		assertEquals(20, board.caculcatePoint(Color.BLACK), 0.01);
-		assertEquals(20.5, board.caculcatePoint(Color.WHITE), 0.01);
-
+		System.out.println(chessView.view(board));
 	}
 
-	private void addPiece(String position, Piece piece) {
-		board.move(position, piece);
+	@Test
+	public void caculcatePoint_pawn() throws Exception {
+		board.emptyInitialize();
+
+		addPiece(Pawn.createBlack(new Position("b6")));
+		addPiece(Pawn.createBlack(new Position("b5")));
+		addPiece(Pawn.createBlack(new Position("b4")));
+
+		assertEquals(1.5, board.caculcatePoint(Color.BLACK), 0.01);
 	}
 
-	private String appendNewLine(String string) {
-		StringBuffer bf = new StringBuffer();
-		bf.append(string);
-		return bf.toString() + returnLine;
+	@Test
+	public void move_valid() throws Exception {
+		board.initialize();
+
+		Position sourcePosition = new Position("b2");
+		Position targetPosition = new Position("b3");
+		board.move(sourcePosition, targetPosition);
+		assertEquals(Blank.create(sourcePosition), board.findPiece(sourcePosition));
+		assertEquals(Pawn.createWhite(targetPosition), board.findPiece(targetPosition));
 	}
 
+	private void addPiece(Piece piece) {
+		board.replacePiece(piece);
+	}
+
+	@Test(expected = InvalidMovePositionException.class)
+	public void same_position_move() throws Exception {
+		board.initialize();
+
+		Position sourcePosition = new Position("b2");
+		Position targetPosition = new Position("b2");
+		board.move(sourcePosition, targetPosition);
+		assertEquals(Blank.create(sourcePosition), board.findPiece(sourcePosition));
+		assertEquals(Pawn.createWhite(targetPosition), board.findPiece(targetPosition));
+	}
 }

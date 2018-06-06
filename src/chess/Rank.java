@@ -5,84 +5,23 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import piece.Bishop;
+import piece.Blank;
+import piece.King;
+import piece.Knight;
+import piece.Pawn;
 import piece.Piece;
 import piece.Piece.Color;
-import piece.Piece.Type;
+import piece.Position;
+import piece.Queen;
+import piece.Rook;
 
 public class Rank {
 
 	private List<Piece> pieces = new ArrayList<>();
 
-	public void createBlackPiecesRank() {
-		createBlackPieces();
-	}
-
-	private void createBlackPieces() {
-		pieces.add(Piece.createBlackRook());
-		pieces.add(Piece.createBlackKnight());
-		pieces.add(Piece.createBlackBishop());
-		pieces.add(Piece.createBlackQueen());
-		pieces.add(Piece.createBlackKing());
-		pieces.add(Piece.createBlackBishop());
-		pieces.add(Piece.createBlackKnight());
-		pieces.add(Piece.createBlackRook());
-	}
-
-	public void createWhitePiecesRank() {
-		createWhitePieces();
-	}
-
-	private void createWhitePieces() {
-		pieces.add(Piece.createWhiteRook());
-		pieces.add(Piece.createWhiteKnight());
-		pieces.add(Piece.createWhiteBishop());
-		pieces.add(Piece.createWhiteQueen());
-		pieces.add(Piece.createWhiteKing());
-		pieces.add(Piece.createWhiteBishop());
-		pieces.add(Piece.createWhiteKnight());
-		pieces.add(Piece.createWhiteRook());
-	}
-
-	public void createBlackPawnRank() {
-		createPawns(Color.BLACK);
-	}
-
-	public void createWhitePawnRank() {
-		createPawns(Color.WHITE);
-	}
-
-	private void createPawns(Color color) {
-		if (color.equals(Color.WHITE)) {
-			createWhitePawn();
-			return;
-		}
-		createBlackPawn();
-	}
-
-	public void createBlankRank() {
-		createBlank();
-	}
-
-	private void createBlank() {
-		for (int i = 0; i < 8; i++) {
-			pieces.add(Piece.createBlank());
-		}
-	}
-
 	public int size() {
 		return pieces.size();
-	}
-
-	private void createBlackPawn() {
-		for (int i = 0; i < 8; i++) {
-			pieces.add(Piece.createBlackPawn());
-		}
-	}
-
-	private void createWhitePawn() {
-		for (int i = 0; i < 8; i++) {
-			pieces.add(Piece.createWhitePawn());
-		}
 	}
 
 	public String getRankRepresentation() {
@@ -97,43 +36,12 @@ public class Rank {
 		return bf.toString();
 	}
 
-	public int getPieceCount(Color color, Type type) {
-		int count = 0;
-		for (Piece index : pieces) {
-			count += isPiece(index, color, type);
-		}
-		return count;
-	}
-
-	private int isPiece(Piece index, Color color, Type type) {
-		if (index.getColor().equals(color) && index.getType().equals(type)) {
-			return 1;
-		}
-		return 0;
-	}
-
-	public Piece getFindPiece(int xPos) {
-		return pieces.get(xPos);
-	}
-
 	public void setPiece(int xPos, Piece piece) {
 		pieces.set(xPos, piece);
 	}
 
 	public Piece findPiece(int xpos) {
 		return pieces.get(xpos);
-	}
-
-	public double findPiece(Color color) {
-		double point = 0;
-		for (Piece index : pieces) {
-			point += index.getPoint(color);
-		}
-		return point;
-	}
-
-	public boolean isHavePawn(Color color, Type type) {
-		return false;
 	}
 
 	public void sortLowToHigh() {
@@ -160,5 +68,67 @@ public class Rank {
 			}
 
 		});
+	}
+
+	public static Rank initializeWhitePieces(int y) {
+		Rank rank = new Rank();
+		rank.addPiece(Rook.createWhite(new Position(1, y)));
+		rank.addPiece(Knight.createWhite(new Position(2, y)));
+		rank.addPiece(Bishop.createWhite(new Position(3, y)));
+		rank.addPiece(Queen.createWhite(new Position(4, y)));
+		rank.addPiece(King.createWhite(new Position(5, y)));
+		rank.addPiece(Bishop.createWhite(new Position(6, y)));
+		rank.addPiece(Knight.createWhite(new Position(7, y)));
+		rank.addPiece(Rook.createWhite(new Position(8, y)));
+		return rank;
+	}
+
+	public static Rank initializeWhitePawns(int y) {
+		Rank rank = new Rank();
+		for (int i = 0; i < 8; i++) {
+			rank.addPiece(Pawn.createWhite(new Position(i + 1, y)));
+		}
+		return rank;
+	}
+
+	public static Rank initializeBlankLine(int y) {
+		Rank rank = new Rank();
+		for (int i = 0; i < 8; i++) {
+			rank.addPiece(Blank.create(new Position(i + 1, y)));
+		}
+		return rank;
+	}
+
+	public static Rank initializeBlackPawns(int y) {
+		Rank rank = new Rank();
+		for (int i = 0; i < 8; i++) {
+			rank.addPiece(Pawn.createBlack(new Position(i + 1, y)));
+		}
+		return rank;
+	}
+
+	public static Rank initializeBlackPieces(int y) {
+		Rank rank = new Rank();
+		rank.addPiece(Rook.createBlack(new Position(1, y)));
+		rank.addPiece(Knight.createBlack(new Position(2, y)));
+		rank.addPiece(Bishop.createBlack(new Position(3, y)));
+		rank.addPiece(Queen.createBlack(new Position(4, y)));
+		rank.addPiece(King.createBlack(new Position(5, y)));
+		rank.addPiece(Bishop.createBlack(new Position(6, y)));
+		rank.addPiece(Knight.createBlack(new Position(7, y)));
+		rank.addPiece(Rook.createBlack(new Position(8, y)));
+		return rank;
+	}
+
+	private void addPiece(Piece piece) {
+		pieces.add(piece);
+	}
+
+	public ArrayList<Piece> findPieceByColor(Color color) {
+		ArrayList<Piece> piecesByColor = new ArrayList<>();
+		for (Piece index : pieces) {
+			index.findPieceByColor(color, piecesByColor);
+		}
+		return piecesByColor;
 	}
 }
