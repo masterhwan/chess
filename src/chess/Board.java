@@ -3,6 +3,7 @@ package chess;
 import java.util.ArrayList;
 import java.util.List;
 
+import Exception.InvalidMovePositionException;
 import piece.Blank;
 import piece.Piece;
 import piece.Piece.Color;
@@ -34,6 +35,9 @@ public class Board {
 	}
 
 	public void move(Position source, Position target) {
+		if (source.equals(target)) {
+			throw new InvalidMovePositionException("제자리 이동 X");
+		}
 		Piece piece = findPiece(source);
 		piece.move(findPiece(target));
 		replacePiece(piece);

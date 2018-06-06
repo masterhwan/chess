@@ -1,10 +1,11 @@
 package chess;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import Exception.InvalidMovePositionException;
 import piece.Blank;
 import piece.King;
 import piece.Pawn;
@@ -124,5 +125,16 @@ public class BoardTest {
 
 	private void addPiece(Piece piece) {
 		board.replacePiece(piece);
+	}
+
+	@Test(expected = InvalidMovePositionException.class)
+	public void same_position_move() throws Exception {
+		board.initialize();
+
+		Position sourcePosition = new Position("b2");
+		Position targetPosition = new Position("b2");
+		board.move(sourcePosition, targetPosition);
+		assertEquals(Blank.create(sourcePosition), board.findPiece(sourcePosition));
+		assertEquals(Pawn.createWhite(targetPosition), board.findPiece(targetPosition));
 	}
 }
