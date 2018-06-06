@@ -1,27 +1,36 @@
 package piece;
 
-import java.util.List;
+import Exception.InvalidMovePositionException;
 
 public class Rook extends Piece {
 
-	private Rook(Color color, Type type, Position position) {
-		super(color, type, position);
+	private Rook(Color color, Position position) {
+		super(color, Type.ROOK, position, Direction.linearDirection());
 	}
 
 	public static Rook createBlack(Position position) {
-		return new Rook(Color.BLACK, Type.ROOK, position);
+		return new Rook(Color.BLACK, position);
 	}
 
 	public static Rook createWhite(Position position) {
-		return new Rook(Color.WHITE, Type.ROOK, position);
+		return new Rook(Color.WHITE, position);
 	}
 
 	@Override
-	public boolean verifyMovePosition(Piece piece) {
-		Position position = this.getPosition();
-		List<Position> positions = position.getRookMovementAble();
-		if (positions.contains(piece.getPosition())) {
-			return true;
+	public Direction verifyMovePosition(Piece target) {
+		Direction direction = getPosition().direction(target.getPosition());
+		if (isAlliance(target)) {
+			throw new InvalidMovePositionException("1");
 		}
-		return false;	}
+
+		if (!getDirections().contains(direction)) {
+			throw new InvalidMovePositionException("1");
+		}
+		return direction;
+	}
+
+	private boolean isAlliance(Piece target) {
+		return getColor() == target.getColor();
+	}
+
 }

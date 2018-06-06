@@ -37,6 +37,28 @@ public class Position {
 		return x;
 	}
 
+	public static class Degree {
+		private int xDegree;
+		private int yDegree;
+
+		private Degree(int xDegree, int yDegree) {
+			this.xDegree = xDegree;
+			this.yDegree = yDegree;
+		}
+
+		public boolean isOverOneXDegree() {
+			return xDegree > 1;
+		}
+
+		public boolean isOverOneYDegree() {
+			return yDegree > 1;
+		}
+
+		public boolean isUnderThreeYDegree() {
+			return yDegree > -3 && yDegree < 3;
+		}
+	}
+
 	public List<Position> getNeighborhoodColumn() {
 		return Arrays.asList(new Position(this.x, this.y + 1), new Position(this.x, this.y - 1));
 	}
@@ -232,6 +254,14 @@ public class Position {
 			position.add(new Position(this.x + index.getX(), this.y + index.getY()));
 		}
 		return position;
+	}
+
+	public Direction direction(Position target) {
+		return Direction.valueOf(target.getX() - this.x, target.getY() - this.y);
+	}
+
+	public Degree degree(Position target) {
+		return new Degree(target.x - x, target.y - y);
 	}
 
 }

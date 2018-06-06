@@ -3,6 +3,8 @@ package piece;
 import java.util.Arrays;
 import java.util.List;
 
+import Exception.InvalidMovePositionException;
+
 public enum Direction {
 	NORTH(0, 1), NORTH_EAST(1, 1), EAST(1, 0), SOUTH_EAST(1, -1), SOUTH(0, -1), SOUTH_WEST(-1, -1), WEST(-1,
 			0), NORTH_WEST(-1,
@@ -48,4 +50,69 @@ public enum Direction {
 		return Arrays.asList(SOUTH, SOUTH_EAST, SOUTH_WEST);
 	}
 
+	public static Direction valueOf(int x, int y) throws InvalidMovePositionException {
+		if (x == 0 && y == 0) {
+			throw new InvalidMovePositionException("유효하지 않은 위치");
+		}
+
+		Direction[] directions = values();
+		for (Direction index : directions) {
+			if (x == index.getX() && y == index.getY()) {
+				return index;
+			}
+		}
+
+		if (x == 0) {
+			return getNorthOrSouth(y);
+		}
+
+		if (y == 0) {
+			return getWestOrEast(x);
+		}
+
+		int remainder = x % y;
+
+		if (remainder != 0) {
+			throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
+		}
+
+		int quotient = x / y;
+
+		if (quotient == 1) {
+			return getNorthEastOrSouthWest(x);
+		}
+
+		if (quotient == -1) {
+			return getNorthWestOrSouthEast(x);
+		}
+		throw new InvalidMovePositionException("유효하지 않은 위치");
+	}
+
+	private static Direction getNorthEastOrSouthWest(int x) {
+		if (x > 0) {
+			return NORTH_EAST;
+		}
+		return SOUTH_WEST;
+	}
+
+	private static Direction getNorthWestOrSouthEast(int x) {
+		if (x < 0) {
+			return NORTH_WEST;
+		}
+		return SOUTH_EAST;
+	}
+
+	private static Direction getWestOrEast(int x) {
+		if (x > 0) {
+			return EAST;
+		}
+		return WEST;
+	}
+
+	private static Direction getNorthOrSouth(int y) {
+		if (y > 0) {
+			return NORTH;
+		}
+		return SOUTH;
+	}
 }

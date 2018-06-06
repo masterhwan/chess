@@ -11,9 +11,8 @@ import piece.King;
 import piece.Knight;
 import piece.Pawn;
 import piece.Piece;
-import piece.Position;
 import piece.Piece.Color;
-import piece.Piece.Type;
+import piece.Position;
 import piece.Queen;
 import piece.Rook;
 
@@ -35,20 +34,6 @@ public class Rank {
 			bf.append(index.getRepresentation());
 		}
 		return bf.toString();
-	}
-
-	public int getPieceCount(Color color, Type type) {
-		int count = 0;
-		for (Piece index : pieces) {
-			if (index.isPiece(color, type)) {
-				count++;
-			}
-		}
-		return count;
-	}
-
-	public Piece getFindPiece(int xPos) {
-		return pieces.get(xPos);
 	}
 
 	public void setPiece(int xPos, Piece piece) {
@@ -98,10 +83,6 @@ public class Rank {
 		return rank;
 	}
 
-	private void addPiece(Piece piece) {
-		pieces.add(piece);
-	}
-
 	public static Rank initializeWhitePawns(int y) {
 		Rank rank = new Rank();
 		for (int i = 0; i < 8; i++) {
@@ -139,19 +120,15 @@ public class Rank {
 		return rank;
 	}
 
+	private void addPiece(Piece piece) {
+		pieces.add(piece);
+	}
+
 	public ArrayList<Piece> findPieceByColor(Color color) {
 		ArrayList<Piece> piecesByColor = new ArrayList<>();
 		for (Piece index : pieces) {
 			index.findPieceByColor(color, piecesByColor);
 		}
 		return piecesByColor;
-	}
-
-	public double getPoint(List<Piece> pieces) {
-		double point = 0;
-		for (Piece index : pieces) {
-			point += index.getPoint();
-		}
-		return point;
 	}
 }

@@ -1,9 +1,11 @@
 package piece;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
+import Exception.InvalidMovePositionException;
 import piece.Piece.Type;
 
 public class BlankTest {
@@ -16,5 +18,11 @@ public class BlankTest {
 	private void verifyPiece(Blank blank, Type type) {
 		assertFalse(blank.isWhite());
 		assertEquals(type, blank.getType());
+	}
+
+	@Test(expected = InvalidMovePositionException.class)
+	public void verifyMovePosition() throws Exception {
+		Blank blank = Blank.create(new Position("b3"));
+		blank.verifyMovePosition(Blank.create(new Position("b4")));
 	}
 }

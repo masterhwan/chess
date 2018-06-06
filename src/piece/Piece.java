@@ -3,6 +3,8 @@ package piece;
 import java.util.ArrayList;
 import java.util.List;
 
+import piece.Position.Degree;
+
 public abstract class Piece {
 	public enum Color {
 		BLACK, WHITE, NOCOLOR;
@@ -32,11 +34,12 @@ public abstract class Piece {
 		}
 	}
 
-	abstract public boolean verifyMovePosition(Piece piece);
+	abstract public Direction verifyMovePosition(Piece piece);
 
 	private Color color;
 	private Type type;
 	private Position position;
+	private List<Direction> directions;
 
 	public Piece(Color color, Type type, Position position) {
 		this.color = color;
@@ -44,11 +47,18 @@ public abstract class Piece {
 		this.position = position;
 	}
 
+	public Piece(Color color, Type type, Position position, List<Direction> directions) {
+		this.color = color;
+		this.type = type;
+		this.position = position;
+		this.directions = directions;
+	}
+
 	public boolean isPiece(Color color, Type type) {
 		return matchColor(color) && matchType(type);
 	}
 
-	private boolean matchColor(Color color) {
+	public boolean matchColor(Color color) {
 		return this.color == color;
 	}
 
@@ -142,5 +152,13 @@ public abstract class Piece {
 			System.out.println("\n");
 		}
 		return getPoint();
+	}
+
+	public List<Direction> getDirections() {
+		return directions;
+	}
+
+	public Degree degree(Piece target) {
+		return position.degree(target.position);
 	}
 }
